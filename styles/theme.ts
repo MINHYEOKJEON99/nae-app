@@ -1,4 +1,41 @@
-export const lightTheme = {
+export interface AppTheme {
+  colors: {
+    background: string;
+    foreground: string;
+    button: string;
+    text: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+    };
+    accent: string;
+    border: string;
+    hot: string;
+    success: string;
+  };
+  spacing: {
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+  };
+  typography: {
+    heading: { fontSize: string; fontWeight: number; lineHeight: string };
+    subheading: { fontSize: string; fontWeight: number; lineHeight: string };
+    body: { fontSize: string; fontWeight: number; lineHeight: string };
+    caption: { fontSize: string; fontWeight: number; lineHeight: string };
+  };
+  borderRadius: {
+    sm: string;
+    md: string;
+    lg: string;
+    full: string;
+  };
+  maxWidth: string;
+}
+
+export const lightTheme: AppTheme = {
   colors: {
     background: '#f2f4f5',
     foreground: '#ffffff',
@@ -21,26 +58,10 @@ export const lightTheme = {
     xl: '32px',
   },
   typography: {
-    heading: {
-      fontSize: '20px',
-      fontWeight: 700,
-      lineHeight: '28px',
-    },
-    subheading: {
-      fontSize: '16px',
-      fontWeight: 600,
-      lineHeight: '24px',
-    },
-    body: {
-      fontSize: '14px',
-      fontWeight: 400,
-      lineHeight: '22px',
-    },
-    caption: {
-      fontSize: '12px',
-      fontWeight: 400,
-      lineHeight: '18px',
-    },
+    heading: { fontSize: '20px', fontWeight: 700, lineHeight: '28px' },
+    subheading: { fontSize: '16px', fontWeight: 600, lineHeight: '24px' },
+    body: { fontSize: '14px', fontWeight: 400, lineHeight: '22px' },
+    caption: { fontSize: '12px', fontWeight: 400, lineHeight: '18px' },
   },
   borderRadius: {
     sm: '8px',
@@ -49,9 +70,9 @@ export const lightTheme = {
     full: '9999px',
   },
   maxWidth: '480px',
-} as const;
+};
 
-export const darkTheme = {
+export const darkTheme: AppTheme = {
   ...lightTheme,
   colors: {
     ...lightTheme.colors,
@@ -65,6 +86,4 @@ export const darkTheme = {
     },
     border: '#2c2d35',
   },
-} as const;
-
-export type AppTheme = typeof lightTheme;
+};
