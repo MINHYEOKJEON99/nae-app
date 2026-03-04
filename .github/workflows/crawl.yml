@@ -1,0 +1,28 @@
+name: News Crawl
+
+on:
+  schedule:
+    - cron: '0 23 * * *'   # 08:00 KST (다음날)
+    - cron: '0 3 * * *'    # 12:00 KST
+    - cron: '0 9 * * *'    # 18:00 KST
+  workflow_dispatch: {}      # 수동 실행
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r crawler/requirements.txt
+
+      - name: Run crawler
+        run: python -m crawler.main
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
