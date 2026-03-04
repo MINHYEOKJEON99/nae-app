@@ -3,7 +3,6 @@
 import Header from '@/components/layout/Header';
 import BriefingCard from '@/components/today/BriefingCard';
 import MainIssueList from '@/components/today/MainIssueList';
-import UpdateBanner from '@/components/today/UpdateBanner';
 import ClosingSummary from '@/components/today/ClosingSummary';
 import KeywordChips from '@/components/today/KeywordChips';
 import { useBriefing } from '@/hooks/useBriefing';
@@ -35,14 +34,7 @@ export default function TodayPage() {
       <Header date={formatDate(briefing.date)} title="Today AI" />
       <BriefingCard intro={briefing.intro} />
       <MainIssueList issues={briefing.mainIssues} />
-      <UpdateBanner
-        type="midday"
-        items={[
-          'OpenAI 관련 후속 발표 추가',
-          '한국 AI 스타트업 투자 소식 반영',
-        ]}
-      />
-      <ClosingSummary text={briefing.closingSummary} />
+<ClosingSummary text={briefing.closingSummary} />
       <KeywordChips keywords={briefing.keywords} />
     </div>
   );

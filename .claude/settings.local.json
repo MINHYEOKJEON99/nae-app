@@ -6,7 +6,8 @@
       "WebFetch(domain:github.com)",
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(curl:*)"
     ]
   }
 }

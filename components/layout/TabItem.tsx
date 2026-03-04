@@ -10,7 +10,9 @@ interface TabItemProps {
   icon: React.ReactNode;
 }
 
-const StyledLink = styled(Link)<{ $active: boolean }>`
+const StyledLink = styled(Link, {
+  shouldForwardProp: (prop) => prop !== '$active',
+})<{ $active: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;

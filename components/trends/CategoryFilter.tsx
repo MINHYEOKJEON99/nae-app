@@ -8,7 +8,9 @@ const Wrapper = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
-const Chip = styled.button<{ $active: boolean }>`
+const Chip = styled('button', {
+  shouldForwardProp: (prop) => prop !== '$active',
+})<{ $active: boolean }>`
   padding: 8px 16px;
   border-radius: ${({ theme }) => theme.borderRadius.full};
   font-size: 13px;
