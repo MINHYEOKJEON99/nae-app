@@ -10,7 +10,12 @@
       "Bash(curl:*)",
       "Bash(python:*)",
       "Bash(npx next:*)",
-      "WebFetch(domain:zdnet.co.kr)"
+      "WebFetch(domain:zdnet.co.kr)",
+      "Bash(ls:*)",
+      "Bash(xargs wc:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(rm:*)",
+      "Bash(rmdir styles:*)"
     ]
   }
 }

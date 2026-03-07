@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/* ===== CUSTOM THEME ===== */
+@theme {
+  /* Colors - Light (default) */
+  --color-bg: #f2f4f5;
+  --color-fg: #ffffff;
+  --color-button: #f2f4f6;
+  --color-text-primary: #191f28;
+  --color-text-secondary: #8b95a1;
+  --color-text-tertiary: #b0b8c1;
+  --color-accent: #3182f6;
+  --color-border: #e5e8eb;
+  --color-hot: #f04452;
+  --color-success: #00c853;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Typography - Font Sizes */
+  --font-size-heading: 20px;
+  --font-size-subheading: 16px;
+  --font-size-body: 14px;
+  --font-size-caption: 12px;
+
+  /* Line Heights */
+  --line-height-heading: 28px;
+  --line-height-subheading: 24px;
+  --line-height-body: 22px;
+  --line-height-caption: 18px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Breakpoints */
+  --breakpoint-desktop: 481px;
+
+  /* Animation */
+  --animate-shimmer: shimmer 1.2s ease-in-out infinite;
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+.dark {
+  --color-bg: #101012;
+  --color-fg: #1c1c1e;
+  --color-button: #2c2d35;
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #aeaeb2;
+  --color-text-tertiary: #636366;
+  --color-border: #2c2d35;
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* ===== BASE RESETS ===== */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system,
+      BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+      'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
+      'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+      'Segoe UI Symbol', sans-serif;
+    line-height: 1.5;
+    min-height: 100dvh;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+
+  input, textarea {
+    font: inherit;
+    color: inherit;
+    border: none;
+    outline: none;
+    background: none;
+  }
+}
+
+/* ===== CUSTOM UTILITIES ===== */
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility word-keep-all {
+  word-break: keep-all;
+}
+
+@utility safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

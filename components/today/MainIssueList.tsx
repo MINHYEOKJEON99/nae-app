@@ -1,5 +1,3 @@
-'use client';
-
 import type { MainIssue } from '@/types/briefing';
 import MainIssueCard from './MainIssueCard';
 

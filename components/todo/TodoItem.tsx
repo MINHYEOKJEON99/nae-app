@@ -1,35 +1,4 @@
-'use client';
-
-import styled from '@emotion/styled';
 import type { Todo } from '@/types/todo';
-
-const Row = styled.div<{ $completed: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
-  padding: 14px 0;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-
-  &:last-child {
-    border-bottom: none;
-  }
-`;
-
-const Checkbox = styled.button<{ $checked: boolean }>`
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  border: 2px solid
-    ${({ theme, $checked }) =>
-      $checked ? theme.colors.accent : theme.colors.text.tertiary};
-  background: ${({ theme, $checked }) =>
-    $checked ? theme.colors.accent : 'transparent'};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s ease;
-`;
 
 const CheckIcon = () => (
   <svg width={12} height={12} viewBox="0 0 12 12" fill="none">
@@ -42,35 +11,6 @@ const CheckIcon = () => (
     />
   </svg>
 );
-
-const Content = styled.div`
-  flex: 1;
-  min-width: 0;
-`;
-
-const Title = styled.span<{ $completed: boolean }>`
-  font-size: 14px;
-  color: ${({ theme, $completed }) =>
-    $completed ? theme.colors.text.tertiary : theme.colors.text.primary};
-  text-decoration: ${({ $completed }) =>
-    $completed ? 'line-through' : 'none'};
-`;
-
-const DeleteButton = styled.button`
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.colors.text.tertiary};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  transition: background 0.15s ease;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.button};
-  }
-`;
 
 const DeleteIcon = () => (
   <svg width={14} height={14} viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
@@ -86,16 +26,34 @@ interface TodoItemProps {
 
 export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
-    <Row $completed={todo.completed}>
-      <Checkbox $checked={todo.completed} onClick={() => onToggle(todo._id)}>
+    <div className="flex items-center gap-md py-[14px] border-b border-border last:border-b-0">
+      <button
+        className={`shrink-0 w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-all duration-150 ${
+          todo.completed
+            ? 'border-accent bg-accent'
+            : 'border-text-tertiary bg-transparent'
+        }`}
+        onClick={() => onToggle(todo._id)}
+      >
         {todo.completed && <CheckIcon />}
-      </Checkbox>
-      <Content>
-        <Title $completed={todo.completed}>{todo.title}</Title>
-      </Content>
-      <DeleteButton onClick={() => onDelete(todo._id)}>
+      </button>
+      <div className="flex-1 min-w-0">
+        <span
+          className={`text-[14px] ${
+            todo.completed
+              ? 'text-text-tertiary line-through'
+              : 'text-text-primary no-underline'
+          }`}
+        >
+          {todo.title}
+        </span>
+      </div>
+      <button
+        className="shrink-0 w-7 h-7 flex items-center justify-center text-text-tertiary rounded-sm transition-colors duration-150 hover:bg-button"
+        onClick={() => onDelete(todo._id)}
+      >
         <DeleteIcon />
-      </DeleteButton>
-    </Row>
+      </button>
+    </div>
   );
 }

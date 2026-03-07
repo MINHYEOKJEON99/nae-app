@@ -1,94 +1,5 @@
-'use client';
-
-import styled from '@emotion/styled';
 import type { Article } from '@/types/article';
 import HotBadge from './HotBadge';
-
-const RankedCard = styled.a`
-  display: block;
-  background: ${({ theme }) => theme.colors.foreground};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  padding: ${({ theme }) => theme.spacing.lg};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  text-decoration: none;
-`;
-
-const RankedTopRow = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: ${({ theme }) => theme.spacing.md};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-`;
-
-const Rank = styled.span`
-  flex-shrink: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.accent};
-  min-width: 24px;
-`;
-
-const RankedTitle = styled.h3`
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: ${({ theme }) => theme.colors.text.primary};
-  word-break: keep-all;
-  flex: 1;
-`;
-
-const RankedSummary = styled.p`
-  font-size: 13px;
-  line-height: 1.5;
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-  word-break: keep-all;
-`;
-
-const ChipRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-`;
-
-const KeywordChip = styled.span`
-  font-size: 11px;
-  padding: 3px 8px;
-  background: ${({ theme }) => theme.colors.button};
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  color: ${({ theme }) => theme.colors.text.secondary};
-`;
-
-const CompactCard = styled.a`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
-  background: ${({ theme }) => theme.colors.foreground};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  padding: ${({ theme }) => theme.spacing.md};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-  text-decoration: none;
-`;
-
-const CompactContent = styled.div`
-  flex: 1;
-  min-width: 0;
-`;
-
-const CompactTitle = styled.h4`
-  font-size: 14px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.text.primary};
-  line-height: 1.4;
-  margin-bottom: 4px;
-  word-break: keep-all;
-`;
-
-const CompactMeta = styled.p`
-  font-size: 12px;
-  color: ${({ theme }) => theme.colors.text.tertiary};
-`;
 
 interface ArticleCardProps {
   article: Article;
@@ -103,31 +14,52 @@ export default function ArticleCard({
 }: ArticleCardProps) {
   if (variant === 'ranked') {
     return (
-      <RankedCard href={article.url} target="_blank" rel="noopener noreferrer">
-        <RankedTopRow>
-          <Rank>{rank}</Rank>
-          <RankedTitle>{article.title}</RankedTitle>
-        </RankedTopRow>
-        <RankedSummary>{article.aiSummaryShort}</RankedSummary>
-        <ChipRow>
+      <a
+        href={article.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block bg-fg rounded-lg p-lg mb-md no-underline"
+      >
+        <div className="flex items-start gap-md mb-sm">
+          <span className="shrink-0 text-[18px] font-bold text-accent min-w-[24px]">
+            {rank}
+          </span>
+          <h3 className="text-[15px] font-semibold leading-[1.4] text-text-primary word-keep-all flex-1">
+            {article.title}
+          </h3>
+        </div>
+        <p className="text-[13px] leading-[1.5] text-text-secondary mb-sm word-keep-all">
+          {article.aiSummaryShort}
+        </p>
+        <div className="flex items-center gap-[6px] flex-wrap">
           {article.isHot && <HotBadge />}
           {article.keywords.slice(0, 3).map((kw) => (
-            <KeywordChip key={kw}>{kw}</KeywordChip>
+            <span
+              key={kw}
+              className="text-[11px] py-[3px] px-[8px] bg-button rounded-full text-text-secondary"
+            >
+              {kw}
+            </span>
           ))}
-        </ChipRow>
-      </RankedCard>
+        </div>
+      </a>
     );
   }
 
   return (
-    <CompactCard href={article.url} target="_blank" rel="noopener noreferrer">
-      <CompactContent>
-        <CompactTitle>{article.title}</CompactTitle>
-        <CompactMeta>
-          {article.aiSummaryShort}
-        </CompactMeta>
-      </CompactContent>
+    <a
+      href={article.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-md bg-fg rounded-md p-md mb-sm no-underline"
+    >
+      <div className="flex-1 min-w-0">
+        <h4 className="text-[14px] font-medium text-text-primary leading-[1.4] mb-[4px] word-keep-all">
+          {article.title}
+        </h4>
+        <p className="text-[12px] text-text-tertiary">{article.aiSummaryShort}</p>
+      </div>
       {article.isHot && <HotBadge />}
-    </CompactCard>
+    </a>
   );
 }

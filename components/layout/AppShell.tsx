@@ -1,28 +1,9 @@
-'use client';
-
-import styled from '@emotion/styled';
-
-const Wrapper = styled.div`
-  max-width: ${({ theme }) => theme.maxWidth};
-  margin: 0 auto;
-  min-height: 100dvh;
-  background: ${({ theme }) => theme.colors.background};
-  position: relative;
-
-  @media (min-width: 481px) {
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.06);
-  }
-`;
-
-const Content = styled.main`
-  padding: ${({ theme }) => theme.spacing.md};
-  padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 16px);
-`;
-
 export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <Wrapper>
-      <Content>{children}</Content>
-    </Wrapper>
+    <div className="max-w-[480px] mx-auto min-h-dvh bg-bg relative desktop:shadow-[0_0_40px_rgba(0,0,0,0.06)]">
+      <main className="p-md pb-[calc(56px+env(safe-area-inset-bottom,0px)+16px)]">
+        {children}
+      </main>
+    </div>
   );
 }

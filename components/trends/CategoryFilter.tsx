@@ -1,27 +1,3 @@
-'use client';
-
-import styled from '@emotion/styled';
-
-const Wrapper = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-`;
-
-const Chip = styled('button', {
-  shouldForwardProp: (prop) => prop !== '$active',
-})<{ $active: boolean }>`
-  padding: 8px 16px;
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  font-size: 13px;
-  font-weight: ${({ $active }) => ($active ? 600 : 400)};
-  background: ${({ theme, $active }) =>
-    $active ? theme.colors.text.primary : theme.colors.foreground};
-  color: ${({ theme, $active }) =>
-    $active ? theme.colors.foreground : theme.colors.text.secondary};
-  transition: all 0.15s ease;
-`;
-
 type FilterValue = 'all' | 'global' | 'korea';
 
 interface CategoryFilterProps {
@@ -40,16 +16,20 @@ export default function CategoryFilter({
   onChange,
 }: CategoryFilterProps) {
   return (
-    <Wrapper>
+    <div className="flex gap-sm mb-lg">
       {filters.map((f) => (
-        <Chip
+        <button
           key={f.value}
-          $active={value === f.value}
+          className={`py-[8px] px-[16px] rounded-full text-[13px] transition-all duration-150 ${
+            value === f.value
+              ? 'font-semibold bg-text-primary text-fg'
+              : 'font-normal bg-fg text-text-secondary'
+          }`}
           onClick={() => onChange(f.value)}
         >
           {f.label}
-        </Chip>
+        </button>
       ))}
-    </Wrapper>
+    </div>
   );
 }

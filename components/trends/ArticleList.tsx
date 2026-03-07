@@ -1,19 +1,7 @@
-'use client';
-
-import styled from '@emotion/styled';
 import type { Article } from '@/types/article';
 import ArticleCard from './ArticleCard';
 import InfiniteScrollTrigger from '@/components/common/InfiniteScrollTrigger';
 import { SkeletonCard } from '@/components/common/Skeleton';
-
-const Section = styled.section``;
-
-const SectionTitle = styled.h2`
-  font-size: ${({ theme }) => theme.typography.subheading.fontSize};
-  font-weight: ${({ theme }) => theme.typography.subheading.fontWeight};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-`;
 
 interface ArticleListProps {
   articles: Article[];
@@ -29,8 +17,10 @@ export default function ArticleList({
   onLoadMore,
 }: ArticleListProps) {
   return (
-    <Section>
-      <SectionTitle>더 많은 뉴스</SectionTitle>
+    <section>
+      <h2 className="text-subheading font-semibold text-text-primary mb-md">
+        더 많은 뉴스
+      </h2>
       {articles.map((article) => (
         <ArticleCard
           key={article._id}
@@ -45,6 +35,6 @@ export default function ArticleList({
         </>
       )}
       <InfiniteScrollTrigger onTrigger={onLoadMore} enabled={hasMore && !isFetchingMore} />
-    </Section>
+    </section>
   );
 }

@@ -1,145 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import styled from '@emotion/styled';
-
-const Overlay = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  z-index: 200;
-
-  /* 모바일: 바텀시트 */
-  align-items: flex-end;
-  justify-content: center;
-
-  /* 데스크탑: 중앙 모달 */
-  @media (min-width: 481px) {
-    align-items: center;
-  }
-`;
-
-const Sheet = styled.div`
-  width: 100%;
-  max-width: ${({ theme }) => theme.maxWidth};
-  background: ${({ theme }) => theme.colors.foreground};
-  padding: ${({ theme }) => theme.spacing.lg};
-
-  /* 모바일: 바텀시트 (하단 붙음, 위만 둥글게) */
-  border-radius: ${({ theme }) => theme.borderRadius.lg}
-    ${({ theme }) => theme.borderRadius.lg} 0 0;
-  padding-bottom: calc(${({ theme }) => theme.spacing.xl} + env(safe-area-inset-bottom, 0px));
-
-  /* 데스크탑: 중앙 모달 (전체 둥글게) */
-  @media (min-width: 481px) {
-    max-width: 400px;
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    padding-bottom: ${({ theme }) => theme.spacing.lg};
-  }
-`;
-
-const Title = styled.h3`
-  font-size: ${({ theme }) => theme.typography.subheading.fontSize};
-  font-weight: ${({ theme }) => theme.typography.subheading.fontWeight};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  text-align: center;
-`;
-
-const TimeGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-`;
-
-const TimeChip = styled.button<{ $selected: boolean }>`
-  padding: 12px 0;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: 14px;
-  font-weight: ${({ $selected }) => ($selected ? 600 : 400)};
-  background: ${({ theme, $selected }) =>
-    $selected ? theme.colors.accent : theme.colors.button};
-  color: ${({ theme, $selected }) =>
-    $selected ? '#fff' : theme.colors.text.primary};
-  transition: all 0.15s ease;
-`;
-
-const CustomTimeRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-`;
-
-const CustomLabel = styled.span`
-  font-size: 13px;
-  color: ${({ theme }) => theme.colors.text.secondary};
-`;
-
-const CustomInput = styled.input`
-  width: 200px;
-  padding: 10px 16px;
-  background: ${({ theme }) => theme.colors.button};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: 20px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
-  text-align: center;
-  border: 1.5px solid transparent;
-  -webkit-appearance: none;
-  appearance: none;
-
-  &:focus {
-    border-color: ${({ theme }) => theme.colors.accent};
-  }
-
-  &::-webkit-calendar-picker-indicator {
-    filter: ${({ theme }) =>
-      theme.colors.background === '#101012'
-        ? 'invert(1) brightness(0.8)'
-        : 'none'};
-    cursor: pointer;
-  }
-`;
-
-const ButtonRow = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
-
-const SkipButton = styled.button`
-  width: 100%;
-  padding: 14px 0;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: 14px;
-  font-weight: 500;
-  background: none;
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-`;
-
-const CancelButton = styled.button`
-  flex: 1;
-  padding: 14px 0;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: 15px;
-  font-weight: 600;
-  background: ${({ theme }) => theme.colors.button};
-  color: ${({ theme }) => theme.colors.text.primary};
-`;
-
-const ConfirmButton = styled.button`
-  flex: 1;
-  padding: 14px 0;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: 15px;
-  font-weight: 600;
-  background: ${({ theme }) => theme.colors.accent};
-  color: #fff;
-`;
 
 const PRESETS = [
   '08:00', '09:00', '10:00', '11:00',
@@ -165,34 +26,59 @@ export default function TimePickerModal({
   };
 
   return (
-    <Overlay onClick={handleOverlayClick}>
-      <Sheet>
-        <Title>시간 선택</Title>
-        <TimeGrid>
+    <div
+      onClick={handleOverlayClick}
+      className="fixed inset-0 bg-black/45 flex z-200 items-end justify-center desktop:items-center"
+    >
+      <div className="w-full max-w-[480px] bg-fg p-lg rounded-t-lg rounded-b-none pb-[calc(var(--spacing-xl)+env(safe-area-inset-bottom,0px))] desktop:max-w-[400px] desktop:rounded-lg desktop:pb-lg">
+        <h3 className="text-subheading font-semibold text-text-primary mb-lg text-center">
+          시간 선택
+        </h3>
+        <div className="grid grid-cols-4 gap-sm mb-lg">
           {PRESETS.map((t) => (
-            <TimeChip
+            <button
               key={t}
-              $selected={selected === t}
+              className={`py-[12px] rounded-md text-[14px] transition-all duration-150 ${
+                selected === t
+                  ? 'font-semibold bg-accent text-white'
+                  : 'font-normal bg-button text-text-primary'
+              }`}
               onClick={() => setSelected(t)}
             >
               {t}
-            </TimeChip>
+            </button>
           ))}
-        </TimeGrid>
-        <CustomTimeRow>
-          <CustomLabel>직접 입력</CustomLabel>
-          <CustomInput
+        </div>
+        <div className="flex items-center justify-center gap-sm mb-lg">
+          <span className="text-[13px] text-text-secondary">직접 입력</span>
+          <input
             type="time"
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
+            className="w-[200px] py-[10px] px-[16px] bg-button rounded-md text-[20px] font-semibold text-text-primary text-center border-[1.5px] border-transparent appearance-none focus:border-accent [&::-webkit-calendar-picker-indicator]:cursor-pointer dark:[&::-webkit-calendar-picker-indicator]:invert dark:[&::-webkit-calendar-picker-indicator]:brightness-[0.8]"
           />
-        </CustomTimeRow>
-        <SkipButton onClick={onSkip}>시간 없이 추가</SkipButton>
-        <ButtonRow>
-          <CancelButton onClick={onCancel}>취소</CancelButton>
-          <ConfirmButton onClick={() => onConfirm(selected)}>확인</ConfirmButton>
-        </ButtonRow>
-      </Sheet>
-    </Overlay>
+        </div>
+        <button
+          onClick={onSkip}
+          className="w-full py-[14px] rounded-md text-[14px] font-medium bg-transparent text-text-secondary mb-sm"
+        >
+          시간 없이 추가
+        </button>
+        <div className="flex gap-sm">
+          <button
+            onClick={onCancel}
+            className="flex-1 py-[14px] rounded-md text-[15px] font-semibold bg-button text-text-primary"
+          >
+            취소
+          </button>
+          <button
+            onClick={() => onConfirm(selected)}
+            className="flex-1 py-[14px] rounded-md text-[15px] font-semibold bg-accent text-white"
+          >
+            확인
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,26 +1,5 @@
-'use client';
-
-import styled from '@emotion/styled';
 import type { Todo } from '@/types/todo';
 import TodoItem from './TodoItem';
-
-const Group = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-`;
-
-const TimeHeader = styled.div`
-  font-size: 13px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
-  padding-left: 2px;
-`;
-
-const Card = styled.div`
-  background: ${({ theme }) => theme.colors.foreground};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  padding: 2px ${({ theme }) => theme.spacing.md};
-`;
 
 interface TodoTimeGroupProps {
   time: string;
@@ -36,9 +15,11 @@ export default function TodoTimeGroup({
   onDelete,
 }: TodoTimeGroupProps) {
   return (
-    <Group>
-      <TimeHeader>{time}</TimeHeader>
-      <Card>
+    <div className="mb-md">
+      <div className="text-[13px] font-semibold text-text-secondary mb-xs pl-[2px]">
+        {time}
+      </div>
+      <div className="bg-fg rounded-lg px-md py-[2px]">
         {todos.map((todo) => (
           <TodoItem
             key={todo._id}
@@ -47,7 +28,7 @@ export default function TodoTimeGroup({
             onDelete={onDelete}
           />
         ))}
-      </Card>
-    </Group>
+      </div>
+    </div>
   );
 }

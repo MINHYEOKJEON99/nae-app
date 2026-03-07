@@ -1,50 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import styled from '@emotion/styled';
 import TimePickerModal from './TimePickerModal';
-
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-`;
-
-const Input = styled.input`
-  flex: 1;
-  padding: 12px 16px;
-  background: ${({ theme }) => theme.colors.foreground};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.text.primary};
-  border: 1.5px solid transparent;
-  transition: border-color 0.15s ease;
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.text.tertiary};
-  }
-
-  &:focus {
-    border-color: ${({ theme }) => theme.colors.accent};
-  }
-`;
-
-const AddButton = styled.button`
-  flex-shrink: 0;
-  padding: 12px 16px;
-  background: ${({ theme }) => theme.colors.accent};
-  color: #fff;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: opacity 0.15s ease;
-
-  &:active {
-    opacity: 0.8;
-  }
-`;
 
 interface TodoInputProps {
   onAdd: (title: string, time: string) => void;
@@ -74,14 +31,20 @@ export default function TodoInput({ onAdd }: TodoInputProps) {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        <Input
+      <form onSubmit={handleSubmit} className="flex items-center gap-sm mb-lg">
+        <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="할 일 입력..."
+          className="flex-1 py-[12px] px-[16px] bg-fg rounded-md text-[14px] text-text-primary border-[1.5px] border-transparent transition-colors duration-150 placeholder:text-text-tertiary focus:border-accent"
         />
-        <AddButton type="submit">추가</AddButton>
-      </Form>
+        <button
+          type="submit"
+          className="shrink-0 py-[12px] px-[16px] bg-accent text-white rounded-md text-[14px] font-semibold whitespace-nowrap transition-opacity duration-150 active:opacity-80"
+        >
+          추가
+        </button>
+      </form>
       {showModal && (
         <TimePickerModal
           onConfirm={handleTimeConfirm}
