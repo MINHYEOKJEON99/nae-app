@@ -1,25 +1,21 @@
 import type { Article } from '@/types/article';
 import ArticleCard from './ArticleCard';
-import InfiniteScrollTrigger from '@/components/common/InfiniteScrollTrigger';
-import { SkeletonCard } from '@/components/common/Skeleton';
 
 interface ArticleListProps {
   articles: Article[];
-  hasMore: boolean;
-  isFetchingMore: boolean;
-  onLoadMore: () => void;
+  title?: string;
 }
 
 export default function ArticleList({
   articles,
-  hasMore,
-  isFetchingMore,
-  onLoadMore,
+  title = '더 많은 뉴스',
 }: ArticleListProps) {
+  if (articles.length === 0) return null;
+
   return (
     <section>
       <h2 className="text-subheading font-semibold text-text-primary mb-md">
-        더 많은 뉴스
+        {title}
       </h2>
       {articles.map((article) => (
         <ArticleCard
@@ -28,13 +24,6 @@ export default function ArticleList({
           variant="compact"
         />
       ))}
-      {isFetchingMore && (
-        <>
-          <SkeletonCard />
-          <SkeletonCard />
-        </>
-      )}
-      <InfiniteScrollTrigger onTrigger={onLoadMore} enabled={hasMore && !isFetchingMore} />
     </section>
   );
 }

@@ -3,17 +3,16 @@ import ArticleCard from './ArticleCard';
 
 interface TopFiveSectionProps {
   articles: Article[];
+  title?: string;
 }
 
-export default function TopFiveSection({ articles }: TopFiveSectionProps) {
-  const top5 = [...articles]
-    .sort((a, b) => b.trendScore - a.trendScore)
-    .slice(0, 5);
+export default function TopFiveSection({ articles, title = '오늘의 BEST 5' }: TopFiveSectionProps) {
+  const top5 = articles.slice(0, 5);
 
   return (
     <section className="mb-xl">
       <h2 className="text-subheading font-semibold text-text-primary mb-md">
-        오늘의 BEST 5
+        {title}
       </h2>
       {top5.map((article, i) => (
         <ArticleCard

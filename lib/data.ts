@@ -15,25 +15,23 @@ export async function getBriefing(date: string): Promise<DailyBriefing | null> {
 }
 
 /**
- * 첫 페이지 기사 목록을 MongoDB에서 직접 조회
- * Trends 페이지 Server Component에서 initialData로 사용
+ * 카테고리별 기사 조회 (trendScore 내림차순)
+ * Trends 페이지 Server Component에서 사용
  */
-export async function getInitialArticles(
-  pageSize = 10,
-): Promise<{ items: Article[]; hasMore: boolean }> {
+export async function getArticlesByCategory(
+  category: 'global' | 'korea',
+  limit = 30,
+): Promise<Article[]> {
   const db = await getDb();
-  const col = db.collection('articles');
-  const total = await col.countDocuments({});
-  const docs = await col
-    .find({})
+  const docs = await db
+    .collection('articles')
+    .find({ category })
     .sort({ trendScore: -1, createdAt: -1 })
-    .limit(pageSize)
+    .limit(limit)
     .toArray();
 
-  const items = docs.map(({ _id, ...rest }) => ({
+  return docs.map(({ _id, ...rest }) => ({
     ...rest,
     _id: _id.toString(),
   })) as Article[];
-
-  return { items, hasMore: pageSize < total };
 }

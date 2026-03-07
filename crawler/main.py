@@ -1,7 +1,7 @@
 """
 뉴스 크롤러 엔트리포인트
 - crawlBatch: YYYY-MM-DD-HH (KST)
-- 4개 소스 순차 실행, 에러 시 해당 소스만 skip
+- 5개 소스 순차 실행, 에러 시 해당 소스만 skip
 - 결과 요약 로깅
 """
 
@@ -9,7 +9,7 @@ import sys
 from datetime import datetime, timezone, timedelta
 
 from crawler.db import ensure_indexes, upsert_articles, close
-from crawler.sources import hackernews, rss, reddit, zdnet
+from crawler.sources import hackernews, rss, reddit, zdnet, bloter
 
 KST = timezone(timedelta(hours=9))
 
@@ -18,6 +18,7 @@ SOURCES = [
     ("RSS", rss.fetch),
     ("Reddit", reddit.fetch),
     ("ZDNet Korea", zdnet.fetch),
+    ("Bloter", bloter.fetch),
 ]
 
 

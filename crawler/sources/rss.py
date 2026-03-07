@@ -59,7 +59,7 @@ def fetch(crawl_batch: str) -> list[dict]:
 
                 articles.append({
                     "source": "rss",
-                    "category": "korea" if feed_name == "GeekNews" else "global",
+                    "category": "global",
                     "url": url,
                     "title": title,
                     "summary": summary,

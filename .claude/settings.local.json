@@ -15,7 +15,11 @@
       "Bash(xargs wc:*)",
       "Bash(npm uninstall:*)",
       "Bash(rm:*)",
-      "Bash(rmdir styles:*)"
+      "Bash(rmdir styles:*)",
+      "Bash(xargs grep:*)",
+      "WebFetch(domain:www.bloter.net)",
+      "WebFetch(domain:venturebeat.com)",
+      "WebFetch(domain:www.technologyreview.com)"
     ]
   }
 }
