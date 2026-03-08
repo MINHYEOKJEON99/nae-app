@@ -9,16 +9,15 @@ import sys
 from datetime import datetime, timezone, timedelta
 
 from crawler.db import ensure_indexes, upsert_articles, close
-from crawler.sources import hackernews, rss, reddit, zdnet, bloter
+from crawler.sources import hackernews, rss, reddit, zdnet
 
 KST = timezone(timedelta(hours=9))
 
 SOURCES = [
     ("Hacker News", hackernews.fetch),
-    ("RSS", rss.fetch),
+    ("글로벌 RSS", rss.fetch),
     ("Reddit", reddit.fetch),
-    ("ZDNet Korea", zdnet.fetch),
-    ("Bloter", bloter.fetch),
+    ("한국 RSS", zdnet.fetch),
 ]
 
 
