@@ -19,7 +19,11 @@
       "Bash(xargs grep:*)",
       "WebFetch(domain:www.bloter.net)",
       "WebFetch(domain:venturebeat.com)",
-      "WebFetch(domain:www.technologyreview.com)"
+      "WebFetch(domain:www.technologyreview.com)",
+      "Bash(pip3 list:*)",
+      "Bash(pip3 install:*)",
+      "Bash(python3:*)",
+      "Bash(source:*)"
     ]
   }
 }
