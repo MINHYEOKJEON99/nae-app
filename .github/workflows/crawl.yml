@@ -2,7 +2,7 @@ name: News Crawl
 
 on:
   schedule:
-    - cron: '0 23 * * *'   # 08:00 KST (다음날)
+    - cron: '0 22 * * *'   # 07:00 KST (다음날)
     - cron: '0 3 * * *'    # 12:00 KST
     - cron: '0 9 * * *'    # 18:00 KST
   workflow_dispatch: {}      # 수동 실행
@@ -24,5 +24,14 @@ jobs:
         run: python -m crawler.main
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+
+      - name: Transform articles
+        run: python -m crawler.transform
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+      - name: Generate briefing
+        run: python -m crawler.briefing
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

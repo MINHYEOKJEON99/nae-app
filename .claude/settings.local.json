@@ -23,7 +23,10 @@
       "Bash(pip3 list:*)",
       "Bash(pip3 install:*)",
       "Bash(python3:*)",
-      "Bash(source:*)"
+      "Bash(source:*)",
+      "Bash(gh secret:*)",
+      "Bash(brew install:*)",
+      "Bash(gh auth:*)"
     ]
   }
 }
