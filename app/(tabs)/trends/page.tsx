@@ -5,7 +5,6 @@ import { getArticlesByCategory } from '@/lib/data';
 export const revalidate = 300;
 
 export default async function TrendsPage() {
-  await new Promise((r) => setTimeout(r, 3000)); // TODO: 로딩 테스트용, 삭제할 것
   const [globalArticles, koreaArticles] = await Promise.all([
     getArticlesByCategory('global', 30),
     getArticlesByCategory('korea', 30),

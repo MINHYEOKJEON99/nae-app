@@ -29,7 +29,12 @@
       "Bash(gh auth:*)",
       "Bash(gh run:*)",
       "Bash(git:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(npx create-expo-app@latest:*)",
+      "Bash(npx expo:*)",
+      "Bash(pod install:*)",
+      "Bash(lsof:*)",
+      "Bash(gh api:*)"
     ]
   }
 }

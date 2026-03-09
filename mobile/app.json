@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "NAE",
+    "slug": "nae-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f2f4f5"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.naeapp.mobile"
+    },
+    "android": {
+      "package": "com.naeapp.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#f2f4f5",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "plugins": [
+      "expo-asset"
+    ]
+  }
+}
