@@ -1,5 +1,5 @@
 import TabItem from "./TabItem";
-import { BriefingIcon, TrendIcon, TodoIcon } from "@/components/common/IconSet";
+import { BriefingIcon, TrendIcon, TodoIcon, SettingsIcon } from "@/components/common/IconSet";
 
 export default function BottomTabBar() {
   return (
@@ -7,6 +7,7 @@ export default function BottomTabBar() {
       <TabItem href="/today" label="Today AI" icon={<BriefingIcon size={22} />} />
       <TabItem href="/trends" label="Trends" icon={<TrendIcon size={22} />} />
       <TabItem href="/todo" label="Todo" icon={<TodoIcon size={22} />} />
+      <TabItem href="/settings" label="Settings" icon={<SettingsIcon size={22} />} />
     </nav>
   );
 }

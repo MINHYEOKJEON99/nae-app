@@ -29,7 +29,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
         <script dangerouslySetInnerHTML={{
-          __html: `(function(){try{if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.classList.add('dark')}window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){document.documentElement.classList.toggle('dark',e.matches)})}catch(e){}})();`,
+          __html: `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme:dark)');if(t==='dark')document.documentElement.classList.add('dark');else if(t==='light')document.documentElement.classList.remove('dark');else{if(d.matches)document.documentElement.classList.add('dark')}d.addEventListener('change',function(e){var s=localStorage.getItem('theme');if(!s||s==='system')document.documentElement.classList.toggle('dark',e.matches)})}catch(e){}})();`,
         }} />
       </head>
       <body>

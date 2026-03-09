@@ -28,7 +28,8 @@
       "Bash(brew install:*)",
       "Bash(gh auth:*)",
       "Bash(gh run:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }
