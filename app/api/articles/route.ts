@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
     filter.category = category;
   }
 
+  const skip = page * pageSize;
   let total = await col.countDocuments(filter);
   if (total === 0) {
     filter.crawlBatch = { $regex: `^${getKSTYesterdayString()}` };
