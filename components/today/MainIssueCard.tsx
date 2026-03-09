@@ -1,4 +1,5 @@
 import type { MainIssue } from '@/types/briefing';
+import Markdown from './Markdown';
 
 interface MainIssueCardProps {
   issue: MainIssue;
@@ -16,16 +17,12 @@ export default function MainIssueCard({ issue, index }: MainIssueCardProps) {
           {issue.title}
         </h3>
       </div>
-      <p className="text-body leading-[1.7] text-text-primary mb-md word-keep-all">
-        {issue.summary}
-      </p>
-      <div className="bg-button rounded-md p-md">
+      <Markdown content={issue.summary} />
+      <div className="bg-button rounded-md p-md mt-md">
         <span className="block text-caption font-semibold text-accent mb-xs">
           왜 중요한가?
         </span>
-        <p className="text-[13px] leading-[1.6] text-text-secondary word-keep-all">
-          {issue.whyImportant}
-        </p>
+        <Markdown content={issue.whyImportant} className="text-[13px] text-text-secondary" />
       </div>
     </div>
   );

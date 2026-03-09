@@ -8,6 +8,7 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { getKSTDateString } from '@/lib/format';
 
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
@@ -20,8 +21,11 @@ export async function GET(request: NextRequest) {
   const db = await getDb();
   const col = db.collection('articles');
 
-  // 카테고리 필터 — 유효한 값만 적용
-  const filter: Record<string, string> = {};
+  // 오늘 날짜(KST) 기준 필터 — crawlBatch는 "YYYY-MM-DD-HH" 형식
+  const todayKST = getKSTDateString();
+  const filter: Record<string, unknown> = {
+    crawlBatch: { $regex: `^${todayKST}` },
+  };
   if (category && (category === 'global' || category === 'korea')) {
     filter.category = category;
   }

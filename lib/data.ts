@@ -1,4 +1,5 @@
 import { getDb } from '@/lib/mongodb';
+import { getKSTDateString } from '@/lib/format';
 import type { DailyBriefing } from '@/types/briefing';
 import type { Article } from '@/types/article';
 
@@ -23,9 +24,10 @@ export async function getArticlesByCategory(
   limit = 30,
 ): Promise<Article[]> {
   const db = await getDb();
+  const todayKST = getKSTDateString();
   const docs = await db
     .collection('articles')
-    .find({ category })
+    .find({ category, crawlBatch: { $regex: `^${todayKST}` } })
     .sort({ trendScore: -1, createdAt: -1 })
     .limit(limit)
     .toArray();
