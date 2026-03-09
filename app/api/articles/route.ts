@@ -8,7 +8,7 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
-import { getKSTDateString } from '@/lib/format';
+import { getKSTDateString, getKSTYesterdayString } from '@/lib/format';
 
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
   const db = await getDb();
   const col = db.collection('articles');
 
-  // 오늘 날짜(KST) 기준 필터 — crawlBatch는 "YYYY-MM-DD-HH" 형식
+  // 오늘 날짜(KST) 기준 필터, 없으면 전날 fallback
   const todayKST = getKSTDateString();
   const filter: Record<string, unknown> = {
     crawlBatch: { $regex: `^${todayKST}` },
@@ -30,8 +30,11 @@ export async function GET(request: NextRequest) {
     filter.category = category;
   }
 
-  const skip = page * pageSize;
-  const total = await col.countDocuments(filter);
+  let total = await col.countDocuments(filter);
+  if (total === 0) {
+    filter.crawlBatch = { $regex: `^${getKSTYesterdayString()}` };
+    total = await col.countDocuments(filter);
+  }
 
   // 트렌드 점수 높은 순 → 최신순 정렬
   const docs = await col

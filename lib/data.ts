@@ -1,5 +1,5 @@
 import { getDb } from '@/lib/mongodb';
-import { getKSTDateString } from '@/lib/format';
+import { getKSTDateString, getKSTYesterdayString } from '@/lib/format';
 import type { DailyBriefing } from '@/types/briefing';
 import type { Article } from '@/types/article';
 
@@ -24,13 +24,24 @@ export async function getArticlesByCategory(
   limit = 30,
 ): Promise<Article[]> {
   const db = await getDb();
+  const col = db.collection('articles');
   const todayKST = getKSTDateString();
-  const docs = await db
-    .collection('articles')
+
+  let docs = await col
     .find({ category, crawlBatch: { $regex: `^${todayKST}` } })
     .sort({ trendScore: -1, createdAt: -1 })
     .limit(limit)
     .toArray();
+
+  // 오늘 데이터가 없으면 전날 데이터로 fallback
+  if (docs.length === 0) {
+    const yesterdayKST = getKSTYesterdayString();
+    docs = await col
+      .find({ category, crawlBatch: { $regex: `^${yesterdayKST}` } })
+      .sort({ trendScore: -1, createdAt: -1 })
+      .limit(limit)
+      .toArray();
+  }
 
   return docs.map(({ _id, ...rest }) => ({
     ...rest,

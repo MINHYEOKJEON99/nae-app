@@ -8,6 +8,15 @@ export function getKSTDateString(): string {
 }
 
 /**
+ * 전날 한국시간(KST) 기준 YYYY-MM-DD 문자열 반환
+ */
+export function getKSTYesterdayString(): string {
+  const now = new Date();
+  const kstYesterday = new Date(now.getTime() + 9 * 60 * 60 * 1000 - 24 * 60 * 60 * 1000);
+  return kstYesterday.toISOString().split('T')[0];
+}
+
+/**
  * YYYY-MM-DD → "3월 4일 화요일" 형식으로 변환 (한국어)
  */
 export function formatKoreanDate(dateStr: string): string {

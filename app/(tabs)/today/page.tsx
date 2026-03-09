@@ -4,13 +4,13 @@ import MainIssueList from '@/components/today/MainIssueList';
 import ClosingSummary from '@/components/today/ClosingSummary';
 import KeywordChips from '@/components/today/KeywordChips';
 import { getBriefing } from '@/lib/data';
-import { formatKoreanDate, getKSTDateString } from '@/lib/format';
+import { formatKoreanDate, getKSTDateString, getKSTYesterdayString } from '@/lib/format';
 
 export const revalidate = 300;
 
 export default async function TodayPage() {
   const today = getKSTDateString();
-  const briefing = await getBriefing(today);
+  const briefing = await getBriefing(today) ?? await getBriefing(getKSTYesterdayString());
 
   if (!briefing) {
     return (
