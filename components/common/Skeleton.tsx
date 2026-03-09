@@ -28,3 +28,22 @@ export function SkeletonCard() {
     </div>
   );
 }
+
+export function SkeletonTodoItem() {
+  return (
+    <div>
+      <SkeletonLine width="40px" height="12px" />
+      <div className="bg-fg rounded-xl p-4 mt-1.5 flex items-center gap-3">
+        <div
+          className="w-6 h-6 rounded-full bg-button animate-shimmer shrink-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(90deg, var(--color-button) 0px, var(--color-border) 40px, var(--color-button) 80px)',
+            backgroundSize: '200px 100%',
+          }}
+        />
+        <SkeletonLine width="60%" height="16px" />
+      </div>
+    </div>
+  );
+}
