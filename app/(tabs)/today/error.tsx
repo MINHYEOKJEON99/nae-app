@@ -1,5 +1,7 @@
 'use client';
 
+import { colors } from "@/lib/theme";
+
 interface ErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
@@ -16,7 +18,7 @@ export default function TodayError({ error, reset }: ErrorProps) {
       paddingBottom: 32,
       gap: 16,
     }}>
-      <p style={{ fontSize: 14, lineHeight: '22px', color: 'var(--color-text-secondary)' }}>
+      <p style={{ fontSize: 14, lineHeight: '22px', color: colors.textSecondary }}>
         브리핑을 불러오는 중 오류가 발생했습니다.
       </p>
       <button
@@ -26,7 +28,7 @@ export default function TodayError({ error, reset }: ErrorProps) {
           paddingBottom: 10,
           paddingLeft: 20,
           paddingRight: 20,
-          backgroundColor: 'var(--color-accent)',
+          backgroundColor: colors.accent,
           color: '#fff',
           borderRadius: 12,
           fontSize: 14,

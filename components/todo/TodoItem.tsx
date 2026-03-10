@@ -1,4 +1,5 @@
 import type { Todo } from '@/types/todo';
+import { colors } from "@/lib/theme";
 
 const CheckIcon = () => (
   <svg width={12} height={12} viewBox="0 0 12 12" fill="none">
@@ -32,7 +33,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
       gap: 16,
       paddingTop: 14,
       paddingBottom: 14,
-      borderBottom: '1px solid var(--color-border)',
+      borderBottom: `1px solid ${colors.border}`,
     }}>
       <button
         style={{
@@ -48,8 +49,8 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
           cursor: 'pointer',
           padding: 0,
           ...(todo.completed
-            ? { borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-accent)' }
-            : { borderColor: 'var(--color-text-tertiary)', backgroundColor: 'transparent' }
+            ? { borderColor: colors.accent, backgroundColor: colors.accent }
+            : { borderColor: colors.textTertiary, backgroundColor: 'transparent' }
           ),
         }}
         onClick={() => onToggle(todo._id)}
@@ -61,8 +62,8 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
           style={{
             fontSize: 14,
             ...(todo.completed
-              ? { color: 'var(--color-text-tertiary)', textDecoration: 'line-through' }
-              : { color: 'var(--color-text-primary)', textDecoration: 'none' }
+              ? { color: colors.textTertiary, textDecoration: 'line-through' }
+              : { color: colors.textPrimary, textDecoration: 'none' }
             ),
           }}
         >
@@ -77,7 +78,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'var(--color-text-tertiary)',
+          color: colors.textTertiary,
           borderRadius: 8,
           transition: 'color 0.15s, background-color 0.15s',
           border: 'none',

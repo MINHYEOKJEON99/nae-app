@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import TimePickerModal from './TimePickerModal';
+import { colors } from "@/lib/theme";
 
 interface TodoInputProps {
   onAdd: (title: string, time: string) => void;
@@ -42,10 +43,10 @@ export default function TodoInput({ onAdd }: TodoInputProps) {
             paddingBottom: 12,
             paddingLeft: 16,
             paddingRight: 16,
-            backgroundColor: 'var(--color-fg)',
+            backgroundColor: colors.fg,
             borderRadius: 12,
             fontSize: 14,
-            color: 'var(--color-text-primary)',
+            color: colors.textPrimary,
             border: '1.5px solid transparent',
             transition: 'color 0.15s, background-color 0.15s',
           }}
@@ -58,7 +59,7 @@ export default function TodoInput({ onAdd }: TodoInputProps) {
             paddingBottom: 12,
             paddingLeft: 16,
             paddingRight: 16,
-            backgroundColor: 'var(--color-accent)',
+            backgroundColor: colors.accent,
             color: '#fff',
             borderRadius: 12,
             fontSize: 14,

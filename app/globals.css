@@ -1,49 +1,50 @@
 @import "tailwindcss";
 
-/* ===== CUSTOM THEME ===== */
+/* ===== CUSTOM THEME (Tailwind용) ===== */
 @theme {
-  /* Colors - Light (TDS tokens) */
-  --color-bg: #ffffff;        /* background */
-  --color-fg: #f9fafb;        /* grey50 */
-  --color-button: #f2f4f6;    /* grey100 */
-  --color-text-primary: #191f28;   /* grey900 */
-  --color-text-secondary: #8b95a1; /* grey500 */
-  --color-text-tertiary: #b0b8c1;  /* grey400 */
-  --color-accent: #3182f6;    /* blue500 */
-  --color-border: #e5e8eb;    /* grey200 */
-  --color-hot: #f04452;       /* red500 */
-  --color-success: #03b26c;   /* green500 */
-
-  /* Spacing */
+  --color-bg: #ffffff;
+  --color-fg: #f9fafb;
+  --color-button: #f2f4f6;
+  --color-text-primary: #191f28;
+  --color-text-secondary: #8b95a1;
+  --color-text-tertiary: #b0b8c1;
+  --color-accent: #3182f6;
+  --color-border: #e5e8eb;
+  --color-hot: #f04452;
+  --color-success: #03b26c;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
-
-  /* Typography - Font Sizes */
   --font-size-heading: 20px;
   --font-size-subheading: 16px;
   --font-size-body: 14px;
   --font-size-caption: 12px;
-
-  /* Line Heights */
   --line-height-heading: 28px;
   --line-height-subheading: 24px;
   --line-height-body: 22px;
   --line-height-caption: 18px;
-
-  /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
-
-  /* Breakpoints */
   --breakpoint-desktop: 481px;
-
-  /* Animation */
   --animate-shimmer: shimmer 1.2s ease-in-out infinite;
+}
+
+/* ===== CSS Variables (모든 환경에서 동작) ===== */
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #f9fafb;
+  --color-button: #f2f4f6;
+  --color-text-primary: #191f28;
+  --color-text-secondary: #8b95a1;
+  --color-text-tertiary: #b0b8c1;
+  --color-accent: #3182f6;
+  --color-border: #e5e8eb;
+  --color-hot: #f04452;
+  --color-success: #03b26c;
 }
 
 /* ===== DARK MODE OVERRIDES ===== */
@@ -68,85 +69,66 @@
 }
 
 /* ===== BASE RESETS ===== */
-@layer base {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html {
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    background: var(--color-bg);
-    color: var(--color-text-primary);
-    font-family:
-      "Pretendard Variable",
-      Pretendard,
-      -apple-system,
-      BlinkMacSystemFont,
-      system-ui,
-      Roboto,
-      "Helvetica Neue",
-      "Segoe UI",
-      "Apple SD Gothic Neo",
-      "Noto Sans KR",
-      "Malgun Gothic",
-      "Apple Color Emoji",
-      "Segoe UI Emoji",
-      "Segoe UI Symbol",
-      sans-serif;
-    line-height: 1.5;
-    min-height: 100dvh;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    font: inherit;
-    color: inherit;
-  }
-
-  ul,
-  ol {
-    list-style: none;
-  }
-
-  input,
-  textarea {
-    font: inherit;
-    color: inherit;
-    border: none;
-    outline: none;
-    background: none;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* ===== CUSTOM UTILITIES ===== */
-@utility hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@utility word-keep-all {
-  word-break: keep-all;
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
+  line-height: 1.5;
+  min-height: 100dvh;
 }
 
-@utility safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+  background: none;
 }

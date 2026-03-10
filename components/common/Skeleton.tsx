@@ -1,3 +1,5 @@
+import { colors } from "@/lib/theme";
+
 const shimmerKeyframes = `
 @keyframes shimmer {
   0% { background-position: -200px 0; }
@@ -24,9 +26,9 @@ export function SkeletonLine({
           width: width || '100%',
           height: height || '16px',
           borderRadius: '8px',
-          backgroundColor: 'var(--color-button)',
+          backgroundColor: colors.button,
           backgroundImage:
-            'linear-gradient(90deg, var(--color-button) 0px, var(--color-border) 40px, var(--color-button) 80px)',
+            `linear-gradient(90deg, ${colors.button} 0px, ${colors.border} 40px, ${colors.button} 80px)`,
           backgroundSize: '200px 100%',
           backgroundRepeat: 'no-repeat',
           animation: 'shimmer 1.5s infinite linear',
@@ -39,7 +41,7 @@ export function SkeletonLine({
 export function SkeletonCard() {
   return (
     <div style={{
-      backgroundColor: 'var(--color-fg)',
+      backgroundColor: colors.fg,
       borderRadius: '16px',
       padding: '24px',
       marginBottom: '16px',
@@ -60,7 +62,7 @@ export function SkeletonTodoItem() {
       <ShimmerStyle />
       <SkeletonLine width="40px" height="12px" />
       <div style={{
-        backgroundColor: 'var(--color-fg)',
+        backgroundColor: colors.fg,
         borderRadius: '12px',
         padding: '16px',
         marginTop: '6px',
@@ -73,9 +75,9 @@ export function SkeletonTodoItem() {
             width: '24px',
             height: '24px',
             borderRadius: '9999px',
-            backgroundColor: 'var(--color-button)',
+            backgroundColor: colors.button,
             backgroundImage:
-              'linear-gradient(90deg, var(--color-button) 0px, var(--color-border) 40px, var(--color-button) 80px)',
+              `linear-gradient(90deg, ${colors.button} 0px, ${colors.border} 40px, ${colors.button} 80px)`,
             backgroundSize: '200px 100%',
             backgroundRepeat: 'no-repeat',
             animation: 'shimmer 1.5s infinite linear',

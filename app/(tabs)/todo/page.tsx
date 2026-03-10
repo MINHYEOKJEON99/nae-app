@@ -16,8 +16,8 @@ export default async function TodoPage({ searchParams }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Header title="Todo" />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Header title="할 일" />
         <DateFilter currentDate={currentDate} todayDate={todayKST} />
       </div>
       <TodoContent date={currentDate} />

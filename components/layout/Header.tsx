@@ -1,3 +1,5 @@
+import { colors } from "@/lib/theme";
+
 interface HeaderProps {
   date?: string;
   title: string;
@@ -5,16 +7,15 @@ interface HeaderProps {
 
 export default function Header({ date, title }: HeaderProps) {
   return (
-    <header style={{ paddingTop: 16, paddingBottom: 16, marginBottom: 8 }}>
+    <header style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 8 }}>
       {date && (
         <p
           style={{
             fontSize: 12,
-            lineHeight: '18px',
-            color: 'var(--color-text-secondary)',
+            lineHeight: "18px",
+            color: colors.textSecondary,
             marginBottom: 2,
-          }}
-        >
+          }}>
           {date}
         </p>
       )}
@@ -22,11 +23,10 @@ export default function Header({ date, title }: HeaderProps) {
         style={{
           fontSize: 20,
           fontWeight: 700,
-          lineHeight: '28px',
-          color: 'var(--color-text-primary)',
+          lineHeight: "28px",
+          color: colors.textPrimary,
           margin: 0,
-        }}
-      >
+        }}>
         {title}
       </h1>
     </header>

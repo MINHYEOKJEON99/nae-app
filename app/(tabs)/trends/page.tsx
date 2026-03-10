@@ -4,7 +4,7 @@ import TrendsFeed from "@/components/trends/TrendsFeed";
 import { getArticles } from "@/lib/data";
 import { getKSTDateString } from "@/lib/format";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface Props {
   searchParams: Promise<{ date?: string }>;
@@ -19,8 +19,8 @@ export default async function TrendsPage({ searchParams }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Header title="Trends" />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Header title="IT 뉴스" />
         <DateFilter currentDate={currentDate} todayDate={todayKST} />
       </div>
       <TrendsFeed key={currentDate} initialArticles={articles} date={currentDate} hasMore={hasMore} />

@@ -5,9 +5,10 @@ import MainIssueList from "@/components/today/MainIssueList";
 import ClosingSummary from "@/components/today/ClosingSummary";
 import KeywordChips from "@/components/today/KeywordChips";
 import { getBriefing } from "@/lib/data";
+import { colors } from "@/lib/theme";
 import { getKSTDateString, getKSTYesterdayString } from "@/lib/format";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface Props {
   searchParams: Promise<{ date?: string }>;
@@ -27,8 +28,8 @@ export default async function TodayPage({ searchParams }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Header title="Today AI" />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Header title="오늘의 요약" />
         <DateFilter currentDate={currentDate} todayDate={todayKST} />
       </div>
       {briefing ? (
@@ -39,7 +40,7 @@ export default async function TodayPage({ searchParams }: Props) {
           <KeywordChips keywords={briefing.keywords} />
         </>
       ) : (
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: 14 }}>해당 날짜의 브리핑이 없습니다.</p>
+        <p style={{ color: colors.textSecondary, fontSize: 14 }}>해당 날짜의 브리핑이 없습니다.</p>
       )}
     </div>
   );

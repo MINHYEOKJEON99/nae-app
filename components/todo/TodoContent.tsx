@@ -6,6 +6,7 @@ import TodoList from '@/components/todo/TodoList';
 import EmptyState from '@/components/todo/EmptyState';
 import { useTodos } from '@/hooks/useTodos';
 import { getUserId } from '@/lib/userId';
+import { colors } from "@/lib/theme";
 
 export default function TodoContent({ date }: { date: string }) {
   const userId = useMemo(() => getUserId(), []);
@@ -34,7 +35,7 @@ export default function TodoContent({ date }: { date: string }) {
     <>
       <TodoInput onAdd={handleAdd} />
       {isLoading ? (
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: 14 }}>로딩 중...</p>
+        <p style={{ color: colors.textSecondary, fontSize: 14 }}>로딩 중...</p>
       ) : !todos || todos.length === 0 ? (
         <EmptyState />
       ) : (

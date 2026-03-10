@@ -4,7 +4,7 @@ import { SkeletonCard } from "@/components/common/Skeleton";
 export default function TrendsLoading() {
   return (
     <div>
-      <Header title="Trends" />
+      <Header title="IT 뉴스" />
       <SkeletonCard />
       <SkeletonCard />
       <SkeletonCard />

@@ -1,3 +1,4 @@
+import { colors } from "@/lib/theme";
 import Markdown from "./Markdown";
 
 interface BriefingCardProps {
@@ -6,8 +7,8 @@ interface BriefingCardProps {
 
 export default function BriefingCard({ intro }: BriefingCardProps) {
   return (
-    <div style={{ background: 'var(--color-fg)', borderRadius: 16, padding: 24, marginBottom: 16 }}>
-      <span style={{ display: 'inline-block', fontSize: 12, lineHeight: '18px', color: 'var(--color-accent)', fontWeight: 600, marginBottom: 16 }}>
+    <div style={{ background: colors.fg, borderRadius: 16, padding: 24, marginBottom: 16 }}>
+      <span style={{ display: 'inline-block', fontSize: 12, lineHeight: '18px', color: colors.accent, fontWeight: 600, marginBottom: 16 }}>
         오늘의 브리핑
       </span>
       <Markdown content={intro} />

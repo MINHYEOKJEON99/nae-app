@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { colors } from "@/lib/theme";
 
 const PRESETS = [
   '08:00', '09:00', '10:00', '11:00',
@@ -44,7 +45,7 @@ export default function TimePickerModal({
       <div style={{
         width: '100%',
         maxWidth: 480,
-        backgroundColor: 'var(--color-fg)',
+        backgroundColor: colors.fg,
         padding: 24,
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
@@ -56,7 +57,7 @@ export default function TimePickerModal({
           fontSize: 16,
           lineHeight: '24px',
           fontWeight: 600,
-          color: 'var(--color-text-primary)',
+          color: colors.textPrimary,
           marginBottom: 24,
           textAlign: 'center',
         }}>
@@ -80,8 +81,8 @@ export default function TimePickerModal({
                 border: 'none',
                 cursor: 'pointer',
                 ...(selected === t
-                  ? { fontWeight: 600, backgroundColor: 'var(--color-accent)', color: '#fff' }
-                  : { fontWeight: 400, backgroundColor: 'var(--color-button)', color: 'var(--color-text-primary)' }
+                  ? { fontWeight: 600, backgroundColor: colors.accent, color: '#fff' }
+                  : { fontWeight: 400, backgroundColor: colors.button, color: colors.textPrimary }
                 ),
               }}
               onClick={() => setSelected(t)}
@@ -97,7 +98,7 @@ export default function TimePickerModal({
           gap: 8,
           marginBottom: 24,
         }}>
-          <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>직접 입력</span>
+          <span style={{ fontSize: 13, color: colors.textSecondary }}>직접 입력</span>
           <input
             type="time"
             value={selected}
@@ -108,11 +109,11 @@ export default function TimePickerModal({
               paddingBottom: 10,
               paddingLeft: 16,
               paddingRight: 16,
-              backgroundColor: 'var(--color-button)',
+              backgroundColor: colors.button,
               borderRadius: 12,
               fontSize: 20,
               fontWeight: 600,
-              color: 'var(--color-text-primary)',
+              color: colors.textPrimary,
               textAlign: 'center',
               border: '1.5px solid transparent',
               appearance: 'none',
@@ -130,7 +131,7 @@ export default function TimePickerModal({
             fontSize: 14,
             fontWeight: 500,
             backgroundColor: 'transparent',
-            color: 'var(--color-text-secondary)',
+            color: colors.textSecondary,
             marginBottom: 8,
             border: 'none',
             cursor: 'pointer',
@@ -148,8 +149,8 @@ export default function TimePickerModal({
               borderRadius: 12,
               fontSize: 15,
               fontWeight: 600,
-              backgroundColor: 'var(--color-button)',
-              color: 'var(--color-text-primary)',
+              backgroundColor: colors.button,
+              color: colors.textPrimary,
               border: 'none',
               cursor: 'pointer',
             }}
@@ -165,7 +166,7 @@ export default function TimePickerModal({
               borderRadius: 12,
               fontSize: 15,
               fontWeight: 600,
-              backgroundColor: 'var(--color-accent)',
+              backgroundColor: colors.accent,
               color: '#fff',
               border: 'none',
               cursor: 'pointer',

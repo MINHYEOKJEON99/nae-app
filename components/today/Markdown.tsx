@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import { colors } from "@/lib/theme";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -16,12 +17,12 @@ export default function Markdown({ content, style = {} }: MarkdownProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           p: ({ children }) => (
-            <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--color-text-primary)', marginBottom: 8, wordBreak: 'keep-all' }}>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: colors.textPrimary, marginBottom: 8, wordBreak: 'keep-all' }}>
               {children}
             </p>
           ),
           strong: ({ children }) => (
-            <strong style={{ fontWeight: 600, color: 'var(--color-accent)' }}>{children}</strong>
+            <strong style={{ fontWeight: 600, color: colors.accent }}>{children}</strong>
           ),
           ul: ({ children }) => (
             <ul style={{ listStyleType: 'disc', paddingLeft: 24, marginBottom: 8, display: 'flex', flexDirection: 'column', gap: 4 }}>{children}</ul>
@@ -30,12 +31,12 @@ export default function Markdown({ content, style = {} }: MarkdownProps) {
             <ol style={{ listStyleType: 'decimal', paddingLeft: 24, marginBottom: 8, display: 'flex', flexDirection: 'column', gap: 4 }}>{children}</ol>
           ),
           li: ({ children }) => (
-            <li style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-text-primary)', wordBreak: 'keep-all' }}>
+            <li style={{ fontSize: 14, lineHeight: 1.6, color: colors.textPrimary, wordBreak: 'keep-all' }}>
               {children}
             </li>
           ),
           h3: ({ children }) => (
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: colors.textPrimary, marginBottom: 4 }}>
               {children}
             </h3>
           ),

@@ -1,6 +1,7 @@
 "use client";
 
 import type { MainIssue } from "@/types/briefing";
+import { colors } from "@/lib/theme";
 import Markdown from "./Markdown";
 import { BoardRow } from "@toss/tds-mobile";
 
@@ -12,7 +13,7 @@ interface MainIssueCardProps {
 export default function MainIssueCard({ issue, index }: MainIssueCardProps) {
   return (
     <div
-      style={{ background: "var(--color-fg)", borderRadius: 16, paddingTop: 24, paddingBottom: 24, marginBottom: 16 }}>
+      style={{ background: colors.fg, borderRadius: 16, paddingTop: 24, paddingBottom: 24, marginBottom: 16 }}>
       <div
         style={{
           paddingLeft: 24,
@@ -31,7 +32,7 @@ export default function MainIssueCard({ issue, index }: MainIssueCardProps) {
               width: 28,
               height: 28,
               borderRadius: 9999,
-              background: "var(--color-accent)",
+              background: colors.accent,
               color: "#ffffff",
               fontSize: 13,
               fontWeight: 700,
@@ -47,7 +48,7 @@ export default function MainIssueCard({ issue, index }: MainIssueCardProps) {
               fontWeight: 600,
 
               lineHeight: "24px",
-              color: "var(--color-text-primary)",
+              color: colors.textPrimary,
               wordBreak: "keep-all",
             }}>
             {issue.title}

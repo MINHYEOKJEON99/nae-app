@@ -1,4 +1,5 @@
 import type { Article } from '@/types/article';
+import { colors } from "@/lib/theme";
 import ArticleCard from './ArticleCard';
 
 interface TopFiveSectionProps {
@@ -15,7 +16,7 @@ export default function TopFiveSection({ articles, title = '오늘의 BEST 5' }:
         fontSize: '16px',
         lineHeight: '24px',
         fontWeight: 600,
-        color: 'var(--color-text-primary)',
+        color: colors.textPrimary,
         marginBottom: '16px',
       }}>
         {title}

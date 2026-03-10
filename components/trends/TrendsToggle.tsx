@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Article } from "@/types/article";
+import { colors } from "@/lib/theme";
 import TopFiveSection from "./TopFiveSection";
 import ArticleList from "./ArticleList";
 
@@ -31,8 +32,8 @@ export default function TrendsToggle({ globalBest5, globalRest, koreaBest5, kore
             border: 'none',
             cursor: 'pointer',
             transition: 'background-color 0.2s, color 0.2s',
-            backgroundColor: tab === "korea" ? 'var(--color-accent)' : 'var(--color-button)',
-            color: tab === "korea" ? '#ffffff' : 'var(--color-text-secondary)',
+            backgroundColor: tab === "korea" ? colors.accent : colors.button,
+            color: tab === "korea" ? '#ffffff' : colors.textSecondary,
           }}>
           Ko
         </button>
@@ -47,8 +48,8 @@ export default function TrendsToggle({ globalBest5, globalRest, koreaBest5, kore
             border: 'none',
             cursor: 'pointer',
             transition: 'background-color 0.2s, color 0.2s',
-            backgroundColor: tab === "global" ? 'var(--color-accent)' : 'var(--color-button)',
-            color: tab === "global" ? '#ffffff' : 'var(--color-text-secondary)',
+            backgroundColor: tab === "global" ? colors.accent : colors.button,
+            color: tab === "global" ? '#ffffff' : colors.textSecondary,
           }}>
           global
         </button>

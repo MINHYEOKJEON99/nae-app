@@ -1,3 +1,5 @@
+import { colors } from "@/lib/theme";
+
 export default function EmptyState() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: 32, paddingBottom: 32, gap: 8 }}>
@@ -8,7 +10,7 @@ export default function EmptyState() {
           <path d="M24 16v16" />
         </svg>
       </div>
-      <p style={{ fontSize: 14, lineHeight: '22px', color: 'var(--color-text-tertiary)' }}>오늘 할 일을 추가해보세요</p>
+      <p style={{ fontSize: 14, lineHeight: '22px', color: colors.textTertiary }}>오늘 할 일을 추가해보세요</p>
     </div>
   );
 }

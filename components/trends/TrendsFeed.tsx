@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import type { Article } from "@/types/article";
+import { colors } from "@/lib/theme";
 import ArticleCard from "./ArticleCard";
 
 interface TrendsFeedProps {
@@ -27,8 +28,7 @@ export default function TrendsFeed({ initialArticles, date, hasMore: initialHasM
       pages: [{ items: initialArticles, hasMore: initialHasMore }],
       pageParams: [1],
     },
-    getNextPageParam: (lastPage, _, lastPageParam) =>
-      lastPage.hasMore ? (lastPageParam as number) + 1 : undefined,
+    getNextPageParam: (lastPage, _, lastPageParam) => (lastPage.hasMore ? (lastPageParam as number) + 1 : undefined),
   });
 
   useEffect(() => {
@@ -55,14 +55,7 @@ export default function TrendsFeed({ initialArticles, date, hasMore: initialHasM
 
   return (
     <>
-      <section style={{ marginBottom: '32px' }}>
-        <h2 style={{
-          fontSize: '16px',
-          lineHeight: '24px',
-          fontWeight: 600,
-          color: 'var(--color-text-primary)',
-          marginBottom: '16px',
-        }}>BEST 5</h2>
+      <section style={{ marginBottom: "32px" }}>
         {best5.map((article, i) => (
           <ArticleCard key={article._id} article={article} variant="ranked" rank={i + 1} />
         ))}
@@ -70,13 +63,16 @@ export default function TrendsFeed({ initialArticles, date, hasMore: initialHasM
 
       {rest.length > 0 && (
         <section>
-          <h2 style={{
-            fontSize: '16px',
-            lineHeight: '24px',
-            fontWeight: 600,
-            color: 'var(--color-text-primary)',
-            marginBottom: '16px',
-          }}>Top 뉴스</h2>
+          <h2
+            style={{
+              fontSize: "16px",
+              lineHeight: "24px",
+              fontWeight: 600,
+              color: colors.textPrimary,
+              marginBottom: "16px",
+            }}>
+            Top 뉴스
+          </h2>
           {rest.map((article) => (
             <ArticleCard key={article._id} article={article} variant="compact" />
           ))}
@@ -84,10 +80,8 @@ export default function TrendsFeed({ initialArticles, date, hasMore: initialHasM
       )}
 
       {hasNextPage && (
-        <div ref={observerRef} style={{ display: 'flex', justifyContent: 'center', padding: '24px 0' }}>
-          {isFetchingNextPage && (
-            <span style={{ color: 'var(--color-text-tertiary)', fontSize: '14px' }}>불러오는 중...</span>
-          )}
+        <div ref={observerRef} style={{ display: "flex", justifyContent: "center", padding: "24px 0" }}>
+          {isFetchingNextPage && <span style={{ color: colors.textTertiary, fontSize: "14px" }}>불러오는 중...</span>}
         </div>
       )}
     </>

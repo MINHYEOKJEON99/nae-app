@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { colors } from "@/lib/theme";
 import { SunIcon, MoonIcon } from "@/components/common/IconSet";
 
 type Theme = "light" | "dark" | "system";
@@ -31,7 +32,7 @@ export default function ThemeToggle() {
 
   return (
     <div style={{
-      backgroundColor: 'var(--color-fg)',
+      backgroundColor: colors.fg,
       borderRadius: '16px',
       padding: '16px',
     }}>
@@ -42,7 +43,7 @@ export default function ThemeToggle() {
         marginBottom: '12px',
       }}>
         <span style={{
-          color: 'var(--color-text-primary)',
+          color: colors.textPrimary,
           fontSize: '15px',
           fontWeight: 600,
         }}>
@@ -67,8 +68,8 @@ export default function ThemeToggle() {
               border: 'none',
               cursor: 'pointer',
               transition: 'background-color 0.2s, color 0.2s',
-              backgroundColor: theme === opt.value ? 'var(--color-accent)' : 'var(--color-bg)',
-              color: theme === opt.value ? '#ffffff' : 'var(--color-text-secondary)',
+              backgroundColor: theme === opt.value ? colors.accent : colors.bg,
+              color: theme === opt.value ? '#ffffff' : colors.textSecondary,
             }}>
             {opt.icon}
             {opt.label}
