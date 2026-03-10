@@ -1,11 +1,10 @@
-import Header from '@/components/layout/Header';
-import { SkeletonCard } from '@/components/common/Skeleton';
-import { formatKoreanDate, getKSTDateString } from '@/lib/format';
+import Header from "@/components/layout/Header";
+import { SkeletonCard } from "@/components/common/Skeleton";
 
 export default function TodayLoading() {
   return (
     <div>
-      <Header date={formatKoreanDate(getKSTDateString())} title="Today AI" />
+      <Header title="Today AI" />
       <SkeletonCard />
       <SkeletonCard />
       <SkeletonCard />

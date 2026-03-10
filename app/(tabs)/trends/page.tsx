@@ -1,29 +1,29 @@
-import Header from '@/components/layout/Header';
-import TrendsToggle from '@/components/trends/TrendsToggle';
-import { getArticlesByCategory } from '@/lib/data';
+import Header from "@/components/layout/Header";
+import DateFilter from "@/components/common/DateFilter";
+import TrendsFeed from "@/components/trends/TrendsFeed";
+import { getArticles } from "@/lib/data";
+import { getKSTDateString } from "@/lib/format";
 
 export const revalidate = 300;
 
-export default async function TrendsPage() {
-  const [globalArticles, koreaArticles] = await Promise.all([
-    getArticlesByCategory('global', 30),
-    getArticlesByCategory('korea', 30),
-  ]);
+interface Props {
+  searchParams: Promise<{ date?: string }>;
+}
 
-  const globalBest5 = globalArticles.slice(0, 5);
-  const globalRest = globalArticles.slice(5);
-  const koreaBest5 = koreaArticles.slice(0, 5);
-  const koreaRest = koreaArticles.slice(5);
+export default async function TrendsPage({ searchParams }: Props) {
+  const { date } = await searchParams;
+  const todayKST = getKSTDateString();
+  const currentDate = date || todayKST;
+
+  const { articles, hasMore } = await getArticles(20, currentDate);
 
   return (
     <div>
-      <Header title="Trends" />
-      <TrendsToggle
-        globalBest5={globalBest5}
-        globalRest={globalRest}
-        koreaBest5={koreaBest5}
-        koreaRest={koreaRest}
-      />
+      <div className="flex justify-between items-center">
+        <Header title="Trends" />
+        <DateFilter currentDate={currentDate} todayDate={todayKST} />
+      </div>
+      <TrendsFeed key={currentDate} initialArticles={articles} date={currentDate} hasMore={hasMore} />
     </div>
   );
 }

@@ -19,32 +19,35 @@ export async function getBriefing(date: string): Promise<DailyBriefing | null> {
  * 카테고리별 기사 조회 (trendScore 내림차순)
  * Trends 페이지 Server Component에서 사용
  */
-export async function getArticlesByCategory(
-  category: 'global' | 'korea',
-  limit = 30,
-): Promise<Article[]> {
+export async function getArticles(
+  limit = 20,
+  date?: string,
+): Promise<{ articles: Article[]; hasMore: boolean }> {
   const db = await getDb();
   const col = db.collection('articles');
-  const todayKST = getKSTDateString();
+  const targetDate = date || getKSTDateString();
 
   let docs = await col
-    .find({ category, crawlBatch: { $regex: `^${todayKST}` } })
+    .find({ crawlBatch: { $regex: `^${targetDate}` } })
     .sort({ trendScore: -1, createdAt: -1 })
     .limit(limit)
     .toArray();
 
-  // 오늘 데이터가 없으면 전날 데이터로 fallback
-  if (docs.length === 0) {
+  // 특정 날짜 지정이 없고 오늘 데이터가 없으면 전날 데이터로 fallback
+  if (!date && docs.length === 0) {
     const yesterdayKST = getKSTYesterdayString();
     docs = await col
-      .find({ category, crawlBatch: { $regex: `^${yesterdayKST}` } })
+      .find({ crawlBatch: { $regex: `^${yesterdayKST}` } })
       .sort({ trendScore: -1, createdAt: -1 })
       .limit(limit)
       .toArray();
   }
 
-  return docs.map(({ _id, ...rest }) => ({
+  const total = await col.countDocuments({ crawlBatch: { $regex: `^${targetDate}` } });
+  const articles = docs.map(({ _id, ...rest }) => ({
     ...rest,
     _id: _id.toString(),
   })) as Article[];
+
+  return { articles, hasMore: limit < total };
 }

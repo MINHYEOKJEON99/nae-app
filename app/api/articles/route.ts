@@ -17,14 +17,15 @@ export async function GET(request: NextRequest) {
   const page = Math.max(0, Number(params.get('page') ?? 0));
   const pageSize = Math.min(50, Math.max(1, Number(params.get('pageSize') ?? 10)));
   const category = params.get('category'); // 'global' | 'korea' | null
+  const date = params.get('date'); // YYYY-MM-DD | null
 
   const db = await getDb();
   const col = db.collection('articles');
 
-  // 오늘 날짜(KST) 기준 필터, 없으면 전날 fallback
-  const todayKST = getKSTDateString();
+  // 날짜 필터: date 파라미터가 있으면 해당 날짜, 없으면 오늘(KST)
+  const targetDate = date || getKSTDateString();
   const filter: Record<string, unknown> = {
-    crawlBatch: { $regex: `^${todayKST}` },
+    crawlBatch: { $regex: `^${targetDate}` },
   };
   if (category && (category === 'global' || category === 'korea')) {
     filter.category = category;
@@ -32,7 +33,7 @@ export async function GET(request: NextRequest) {
 
   const skip = page * pageSize;
   let total = await col.countDocuments(filter);
-  if (total === 0) {
+  if (!date && total === 0) {
     filter.crawlBatch = { $regex: `^${getKSTYesterdayString()}` };
     total = await col.countDocuments(filter);
   }

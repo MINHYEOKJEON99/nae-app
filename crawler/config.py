@@ -3,8 +3,8 @@
 - 태그 기반 확장 구조 (IT, 주식 등 추가 가능)
 - 소스별 카테고리(global/korea) + 태그(IT/주식 등) 매핑
 
-글로벌: RSS 50 + HN 15 = 65
-한국: 요즘IT 30 + GeekNews 20 + 블로터 15 + ZDNet Korea 15 = 80
+글로벌: RSS 50
+한국: 요즘IT 30 + ITWorld Korea 15 + Byline Network 15 = 60
 """
 
 # ── 글로벌 RSS 피드 ──────────────────────────────
@@ -17,18 +17,10 @@ RSS_FEEDS = [
 ]
 RSS_ITEMS_PER_FEED = 10
 
-# ── Hacker News ──────────────────────────────────
-HN_TOP_STORIES_LIMIT = 15
-
-# ── Reddit ───────────────────────────────────────
-REDDIT_SUBREDDITS = ["programming", "technology", "webdev"]
-REDDIT_POSTS_PER_SUB = 5  # 5 × 3 = 총 15개
-
 # ── 한국 RSS 피드 ────────────────────────────────
 # (URL, 소스이름, 수집제한)
 KOREA_FEEDS = [
     ("https://yozm.wishket.com/magazine/feed/", "요즘IT", 30),
-    ("https://news.hada.io/rss/news", "GeekNews", 20),
     ("https://www.itworld.co.kr/rss/", "ITWorld Korea", 15),
     ("https://byline.network/feed/", "Byline Network", 15),
 ]
@@ -37,10 +29,8 @@ KOREA_FEEDS = [
 # category: 프론트엔드 필터용 (global / korea)
 # tags: 확장용 태그 (IT, 주식, 반도체 등)
 SOURCE_META = {
-    "hn":       {"category": "global", "tags": ["IT"]},
     "rss":      {"category": "global", "tags": ["IT"]},
     "요즘IT":    {"category": "korea",  "tags": ["IT"]},
-    "GeekNews":     {"category": "korea",  "tags": ["IT"]},
     "ITWorld Korea": {"category": "korea", "tags": ["IT"]},
     "Byline Network": {"category": "korea", "tags": ["IT"]},
     # ── 향후 확장 예시 ──
