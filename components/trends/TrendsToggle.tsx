@@ -19,19 +19,37 @@ export default function TrendsToggle({ globalBest5, globalRest, koreaBest5, kore
 
   return (
     <>
-      <div className="flex gap-sm mb-lg">
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
         <button
           onClick={() => setTab("korea")}
-          className={`px-md py-xs rounded-full text-body font-semibold transition-colors ${
-            tab === "korea" ? "bg-accent text-white" : "bg-button text-text-secondary"
-          }`}>
+          style={{
+            padding: '4px 16px',
+            borderRadius: '9999px',
+            fontSize: '14px',
+            lineHeight: '22px',
+            fontWeight: 600,
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'background-color 0.2s, color 0.2s',
+            backgroundColor: tab === "korea" ? 'var(--color-accent)' : 'var(--color-button)',
+            color: tab === "korea" ? '#ffffff' : 'var(--color-text-secondary)',
+          }}>
           Ko
         </button>
         <button
           onClick={() => setTab("global")}
-          className={`px-md py-xs rounded-full text-body font-semibold transition-colors ${
-            tab === "global" ? "bg-accent text-white" : "bg-button text-text-secondary"
-          }`}>
+          style={{
+            padding: '4px 16px',
+            borderRadius: '9999px',
+            fontSize: '14px',
+            lineHeight: '22px',
+            fontWeight: 600,
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'background-color 0.2s, color 0.2s',
+            backgroundColor: tab === "global" ? 'var(--color-accent)' : 'var(--color-button)',
+            color: tab === "global" ? '#ffffff' : 'var(--color-text-secondary)',
+          }}>
           global
         </button>
       </div>

@@ -8,21 +8,21 @@ interface MainIssueCardProps {
 
 export default function MainIssueCard({ issue, index }: MainIssueCardProps) {
   return (
-    <div className="bg-fg rounded-lg p-lg mb-md">
-      <div className="flex items-start gap-md mb-md">
-        <div className="shrink-0 w-7 h-7 rounded-full bg-accent text-white text-[13px] font-bold flex items-center justify-center">
+    <div style={{ background: 'var(--color-fg)', borderRadius: 16, padding: 24, marginBottom: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, marginBottom: 16 }}>
+        <div style={{ flexShrink: 0, width: 28, height: 28, borderRadius: 9999, background: 'var(--color-accent)', color: '#ffffff', fontSize: 13, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {index + 1}
         </div>
-        <h3 className="text-subheading font-semibold leading-subheading text-text-primary word-keep-all">
+        <h3 style={{ fontSize: 16, fontWeight: 600, lineHeight: '24px', color: 'var(--color-text-primary)', wordBreak: 'keep-all' }}>
           {issue.title}
         </h3>
       </div>
       <Markdown content={issue.summary} />
-      <div className="bg-button rounded-md p-md mt-md">
-        <span className="block text-caption font-semibold text-accent mb-xs">
+      <div style={{ background: 'var(--color-button)', borderRadius: 12, padding: 16, marginTop: 16 }}>
+        <span style={{ display: 'block', fontSize: 12, lineHeight: '18px', fontWeight: 600, color: 'var(--color-accent)', marginBottom: 4 }}>
           왜 중요한가?
         </span>
-        <Markdown content={issue.whyImportant} className="text-[13px] text-text-secondary" />
+        <Markdown content={issue.whyImportant} style={{ fontSize: 13, color: 'var(--color-text-secondary)' }} />
       </div>
     </div>
   );

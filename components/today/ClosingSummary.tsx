@@ -6,7 +6,7 @@ interface ClosingSummaryProps {
 
 export default function ClosingSummary({ text }: ClosingSummaryProps) {
   return (
-    <div className="bg-fg rounded-lg p-lg mb-md">
+    <div style={{ background: 'var(--color-fg)', borderRadius: 16, padding: 24, marginBottom: 16 }}>
       <Markdown content={text} />
     </div>
   );

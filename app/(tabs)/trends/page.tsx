@@ -4,7 +4,7 @@ import TrendsFeed from "@/components/trends/TrendsFeed";
 import { getArticles } from "@/lib/data";
 import { getKSTDateString } from "@/lib/format";
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 interface Props {
   searchParams: Promise<{ date?: string }>;
@@ -19,7 +19,7 @@ export default async function TrendsPage({ searchParams }: Props) {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Header title="Trends" />
         <DateFilter currentDate={currentDate} todayDate={todayKST} />
       </div>

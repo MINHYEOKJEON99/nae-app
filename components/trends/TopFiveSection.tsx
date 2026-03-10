@@ -10,8 +10,14 @@ export default function TopFiveSection({ articles, title = '오늘의 BEST 5' }:
   const top5 = articles.slice(0, 5);
 
   return (
-    <section className="mb-xl">
-      <h2 className="text-subheading font-semibold text-text-primary mb-md">
+    <section style={{ marginBottom: '32px' }}>
+      <h2 style={{
+        fontSize: '16px',
+        lineHeight: '24px',
+        fontWeight: 600,
+        color: 'var(--color-text-primary)',
+        marginBottom: '16px',
+      }}>
         {title}
       </h2>
       {top5.map((article, i) => (

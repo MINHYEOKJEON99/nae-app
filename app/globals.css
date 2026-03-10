@@ -2,17 +2,17 @@
 
 /* ===== CUSTOM THEME ===== */
 @theme {
-  /* Colors - Light (default) */
-  --color-bg: #f2f4f5;
-  --color-fg: #ffffff;
-  --color-button: #f2f4f6;
-  --color-text-primary: #191f28;
-  --color-text-secondary: #8b95a1;
-  --color-text-tertiary: #b0b8c1;
-  --color-accent: #3182f6;
-  --color-border: #e5e8eb;
-  --color-hot: #f04452;
-  --color-success: #00c853;
+  /* Colors - Light (TDS tokens) */
+  --color-bg: #ffffff;        /* background */
+  --color-fg: #f9fafb;        /* grey50 */
+  --color-button: #f2f4f6;    /* grey100 */
+  --color-text-primary: #191f28;   /* grey900 */
+  --color-text-secondary: #8b95a1; /* grey500 */
+  --color-text-tertiary: #b0b8c1;  /* grey400 */
+  --color-accent: #3182f6;    /* blue500 */
+  --color-border: #e5e8eb;    /* grey200 */
+  --color-hot: #f04452;       /* red500 */
+  --color-success: #03b26c;   /* green500 */
 
   /* Spacing */
   --spacing-xs: 4px;
@@ -59,8 +59,12 @@
 
 /* ===== KEYFRAMES ===== */
 @keyframes shimmer {
-  0% { background-position: -200px 0; }
-  100% { background-position: calc(200px + 100%) 0; }
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
 }
 
 /* ===== BASE RESETS ===== */
@@ -82,11 +86,22 @@
   body {
     background: var(--color-bg);
     color: var(--color-text-primary);
-    font-family: 'Pretendard Variable', Pretendard, -apple-system,
-      BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
-      'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
-      'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol', sans-serif;
+    font-family:
+      "Pretendard Variable",
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      Roboto,
+      "Helvetica Neue",
+      "Segoe UI",
+      "Apple SD Gothic Neo",
+      "Noto Sans KR",
+      "Malgun Gothic",
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      sans-serif;
     line-height: 1.5;
     min-height: 100dvh;
   }
@@ -104,11 +119,13 @@
     color: inherit;
   }
 
-  ul, ol {
+  ul,
+  ol {
     list-style: none;
   }
 
-  input, textarea {
+  input,
+  textarea {
     font: inherit;
     color: inherit;
     border: none;

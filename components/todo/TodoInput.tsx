@@ -31,16 +31,43 @@ export default function TodoInput({ onAdd }: TodoInputProps) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex items-center gap-sm mb-lg">
+      <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="할 일 입력..."
-          className="flex-1 py-[12px] px-[16px] bg-fg rounded-md text-[14px] text-text-primary border-[1.5px] border-transparent transition-colors duration-150 placeholder:text-text-tertiary focus:border-accent"
+          style={{
+            flex: 1,
+            paddingTop: 12,
+            paddingBottom: 12,
+            paddingLeft: 16,
+            paddingRight: 16,
+            backgroundColor: 'var(--color-fg)',
+            borderRadius: 12,
+            fontSize: 14,
+            color: 'var(--color-text-primary)',
+            border: '1.5px solid transparent',
+            transition: 'color 0.15s, background-color 0.15s',
+          }}
         />
         <button
           type="submit"
-          className="shrink-0 py-[12px] px-[16px] bg-accent text-white rounded-md text-[14px] font-semibold whitespace-nowrap transition-opacity duration-150 active:opacity-80"
+          style={{
+            flexShrink: 0,
+            paddingTop: 12,
+            paddingBottom: 12,
+            paddingLeft: 16,
+            paddingRight: 16,
+            backgroundColor: 'var(--color-accent)',
+            color: '#fff',
+            borderRadius: 12,
+            fontSize: 14,
+            fontWeight: 600,
+            whiteSpace: 'nowrap',
+            transition: 'opacity 0.15s',
+            border: 'none',
+            cursor: 'pointer',
+          }}
         >
           추가
         </button>

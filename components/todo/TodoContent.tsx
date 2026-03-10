@@ -34,7 +34,7 @@ export default function TodoContent({ date }: { date: string }) {
     <>
       <TodoInput onAdd={handleAdd} />
       {isLoading ? (
-        <p className="text-text-secondary text-[14px]">로딩 중...</p>
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: 14 }}>로딩 중...</p>
       ) : !todos || todos.length === 0 ? (
         <EmptyState />
       ) : (

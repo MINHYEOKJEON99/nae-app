@@ -5,11 +5,28 @@ interface HeaderProps {
 
 export default function Header({ date, title }: HeaderProps) {
   return (
-    <header className="py-md mb-sm">
+    <header style={{ paddingTop: 16, paddingBottom: 16, marginBottom: 8 }}>
       {date && (
-        <p className="text-caption text-text-secondary mb-[2px]">{date}</p>
+        <p
+          style={{
+            fontSize: 12,
+            lineHeight: '18px',
+            color: 'var(--color-text-secondary)',
+            marginBottom: 2,
+          }}
+        >
+          {date}
+        </p>
       )}
-      <h1 className="text-heading font-bold leading-heading text-text-primary">
+      <h1
+        style={{
+          fontSize: 20,
+          fontWeight: 700,
+          lineHeight: '28px',
+          color: 'var(--color-text-primary)',
+          margin: 0,
+        }}
+      >
         {title}
       </h1>
     </header>

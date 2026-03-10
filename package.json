@@ -3,15 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "granite dev",
+    "build": "ait build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "npx tsx --env-file=.env.local scripts/seed.ts"
+    "seed": "npx tsx --env-file=.env.local scripts/seed.ts",
+    "deploy": "ait deploy"
   },
   "dependencies": {
+    "@apps-in-toss/web-framework": "^2.0.2",
+    "@emotion/react": "^11.14.0",
     "@tailwindcss/postcss": "^4.2.1",
     "@tanstack/react-query": "^5.90.21",
+    "@toss/tds-mobile": "^2.2.1",
+    "@toss/tds-mobile-ait": "^2.2.1",
     "mongodb": "^7.1.0",
     "next": "16.1.6",
     "postcss": "^8.5.8",

@@ -26,30 +26,65 @@ interface TodoItemProps {
 
 export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
-    <div className="flex items-center gap-md py-[14px] border-b border-border last:border-b-0">
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 16,
+      paddingTop: 14,
+      paddingBottom: 14,
+      borderBottom: '1px solid var(--color-border)',
+    }}>
       <button
-        className={`shrink-0 w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-all duration-150 ${
-          todo.completed
-            ? 'border-accent bg-accent'
-            : 'border-text-tertiary bg-transparent'
-        }`}
+        style={{
+          flexShrink: 0,
+          width: 22,
+          height: 22,
+          borderRadius: 9999,
+          border: '2px solid',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'all 0.15s',
+          cursor: 'pointer',
+          padding: 0,
+          ...(todo.completed
+            ? { borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-accent)' }
+            : { borderColor: 'var(--color-text-tertiary)', backgroundColor: 'transparent' }
+          ),
+        }}
         onClick={() => onToggle(todo._id)}
       >
         {todo.completed && <CheckIcon />}
       </button>
-      <div className="flex-1 min-w-0">
+      <div style={{ flex: 1, minWidth: 0 }}>
         <span
-          className={`text-[14px] ${
-            todo.completed
-              ? 'text-text-tertiary line-through'
-              : 'text-text-primary no-underline'
-          }`}
+          style={{
+            fontSize: 14,
+            ...(todo.completed
+              ? { color: 'var(--color-text-tertiary)', textDecoration: 'line-through' }
+              : { color: 'var(--color-text-primary)', textDecoration: 'none' }
+            ),
+          }}
         >
           {todo.title}
         </span>
       </div>
       <button
-        className="shrink-0 w-7 h-7 flex items-center justify-center text-text-tertiary rounded-sm transition-colors duration-150 hover:bg-button"
+        style={{
+          flexShrink: 0,
+          width: 28,
+          height: 28,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'var(--color-text-tertiary)',
+          borderRadius: 8,
+          transition: 'color 0.15s, background-color 0.15s',
+          border: 'none',
+          backgroundColor: 'transparent',
+          cursor: 'pointer',
+          padding: 0,
+        }}
         onClick={() => onDelete(todo._id)}
       >
         <DeleteIcon />

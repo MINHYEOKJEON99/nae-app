@@ -28,52 +28,148 @@ export default function TimePickerModal({
   return (
     <div
       onClick={handleOverlayClick}
-      className="fixed inset-0 bg-black/45 flex z-200 items-end justify-center desktop:items-center"
+      style={{
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        backgroundColor: 'rgba(0,0,0,0.45)',
+        display: 'flex',
+        zIndex: 200,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+      }}
     >
-      <div className="w-full max-w-[480px] bg-fg p-lg rounded-t-lg rounded-b-none pb-[calc(var(--spacing-xl)+env(safe-area-inset-bottom,0px))] desktop:max-w-[400px] desktop:rounded-lg desktop:pb-lg">
-        <h3 className="text-subheading font-semibold text-text-primary mb-lg text-center">
+      <div style={{
+        width: '100%',
+        maxWidth: 480,
+        backgroundColor: 'var(--color-fg)',
+        padding: 24,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        paddingBottom: 'calc(32px + env(safe-area-inset-bottom, 0px))',
+      }}>
+        <h3 style={{
+          fontSize: 16,
+          lineHeight: '24px',
+          fontWeight: 600,
+          color: 'var(--color-text-primary)',
+          marginBottom: 24,
+          textAlign: 'center',
+        }}>
           시간 선택
         </h3>
-        <div className="grid grid-cols-4 gap-sm mb-lg">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: 8,
+          marginBottom: 24,
+        }}>
           {PRESETS.map((t) => (
             <button
               key={t}
-              className={`py-[12px] rounded-md text-[14px] transition-all duration-150 ${
-                selected === t
-                  ? 'font-semibold bg-accent text-white'
-                  : 'font-normal bg-button text-text-primary'
-              }`}
+              style={{
+                paddingTop: 12,
+                paddingBottom: 12,
+                borderRadius: 12,
+                fontSize: 14,
+                transition: 'all 0.15s',
+                border: 'none',
+                cursor: 'pointer',
+                ...(selected === t
+                  ? { fontWeight: 600, backgroundColor: 'var(--color-accent)', color: '#fff' }
+                  : { fontWeight: 400, backgroundColor: 'var(--color-button)', color: 'var(--color-text-primary)' }
+                ),
+              }}
               onClick={() => setSelected(t)}
             >
               {t}
             </button>
           ))}
         </div>
-        <div className="flex items-center justify-center gap-sm mb-lg">
-          <span className="text-[13px] text-text-secondary">직접 입력</span>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 8,
+          marginBottom: 24,
+        }}>
+          <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>직접 입력</span>
           <input
             type="time"
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
-            className="w-[200px] py-[10px] px-[16px] bg-button rounded-md text-[20px] font-semibold text-text-primary text-center border-[1.5px] border-transparent appearance-none focus:border-accent [&::-webkit-calendar-picker-indicator]:cursor-pointer dark:[&::-webkit-calendar-picker-indicator]:invert dark:[&::-webkit-calendar-picker-indicator]:brightness-[0.8]"
+            style={{
+              width: 200,
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingLeft: 16,
+              paddingRight: 16,
+              backgroundColor: 'var(--color-button)',
+              borderRadius: 12,
+              fontSize: 20,
+              fontWeight: 600,
+              color: 'var(--color-text-primary)',
+              textAlign: 'center',
+              border: '1.5px solid transparent',
+              appearance: 'none',
+              WebkitAppearance: 'none',
+            }}
           />
         </div>
         <button
           onClick={onSkip}
-          className="w-full py-[14px] rounded-md text-[14px] font-medium bg-transparent text-text-secondary mb-sm"
+          style={{
+            width: '100%',
+            paddingTop: 14,
+            paddingBottom: 14,
+            borderRadius: 12,
+            fontSize: 14,
+            fontWeight: 500,
+            backgroundColor: 'transparent',
+            color: 'var(--color-text-secondary)',
+            marginBottom: 8,
+            border: 'none',
+            cursor: 'pointer',
+          }}
         >
           시간 없이 추가
         </button>
-        <div className="flex gap-sm">
+        <div style={{ display: 'flex', gap: 8 }}>
           <button
             onClick={onCancel}
-            className="flex-1 py-[14px] rounded-md text-[15px] font-semibold bg-button text-text-primary"
+            style={{
+              flex: 1,
+              paddingTop: 14,
+              paddingBottom: 14,
+              borderRadius: 12,
+              fontSize: 15,
+              fontWeight: 600,
+              backgroundColor: 'var(--color-button)',
+              color: 'var(--color-text-primary)',
+              border: 'none',
+              cursor: 'pointer',
+            }}
           >
             취소
           </button>
           <button
             onClick={() => onConfirm(selected)}
-            className="flex-1 py-[14px] rounded-md text-[15px] font-semibold bg-accent text-white"
+            style={{
+              flex: 1,
+              paddingTop: 14,
+              paddingBottom: 14,
+              borderRadius: 12,
+              fontSize: 15,
+              fontWeight: 600,
+              backgroundColor: 'var(--color-accent)',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+            }}
           >
             확인
           </button>

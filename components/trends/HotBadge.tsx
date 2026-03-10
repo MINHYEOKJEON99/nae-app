@@ -1,6 +1,16 @@
 export default function HotBadge() {
   return (
-    <span className="inline-flex items-center px-[8px] py-[2px] bg-hot text-white text-[11px] font-bold rounded-full tracking-[0.5px]">
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      padding: '2px 8px',
+      backgroundColor: 'var(--color-hot)',
+      color: '#ffffff',
+      fontSize: '11px',
+      fontWeight: 'bold',
+      borderRadius: '9999px',
+      letterSpacing: '0.5px',
+    }}>
       HOT
     </span>
   );

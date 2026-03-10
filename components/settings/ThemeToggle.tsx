@@ -30,18 +30,46 @@ export default function ThemeToggle() {
   ];
 
   return (
-    <div className="bg-fg rounded-2xl p-4">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="text-text-primary text-[15px] font-semibold">테마</span>
+    <div style={{
+      backgroundColor: 'var(--color-fg)',
+      borderRadius: '16px',
+      padding: '16px',
+    }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        marginBottom: '12px',
+      }}>
+        <span style={{
+          color: 'var(--color-text-primary)',
+          fontSize: '15px',
+          fontWeight: 600,
+        }}>
+          테마
+        </span>
       </div>
-      <div className="flex gap-2">
+      <div style={{ display: 'flex', gap: '8px' }}>
         {options.map((opt) => (
           <button
             key={opt.value}
             onClick={() => setTheme(opt.value)}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[13px] font-medium transition-colors ${
-              theme === opt.value ? "bg-accent text-white" : "bg-bg text-text-secondary"
-            }`}>
+            style={{
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              padding: '10px 0',
+              borderRadius: '12px',
+              fontSize: '13px',
+              fontWeight: 500,
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s, color 0.2s',
+              backgroundColor: theme === opt.value ? 'var(--color-accent)' : 'var(--color-bg)',
+              color: theme === opt.value ? '#ffffff' : 'var(--color-text-secondary)',
+            }}>
             {opt.icon}
             {opt.label}
           </button>

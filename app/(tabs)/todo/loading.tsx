@@ -6,7 +6,7 @@ export default function TodoLoading() {
   return (
     <div>
       <Header date={formatKoreanDate(getKSTDateString())} title="Todo" />
-      <div className="flex flex-col gap-3">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <SkeletonTodoItem />
         <SkeletonTodoItem />
         <SkeletonTodoItem />

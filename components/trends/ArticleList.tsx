@@ -14,7 +14,13 @@ export default function ArticleList({
 
   return (
     <section>
-      <h2 className="text-subheading font-semibold text-text-primary mb-md">
+      <h2 style={{
+        fontSize: '16px',
+        lineHeight: '24px',
+        fontWeight: 600,
+        color: 'var(--color-text-primary)',
+        marginBottom: '16px',
+      }}>
         {title}
       </h2>
       {articles.map((article) => (

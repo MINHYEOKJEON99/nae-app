@@ -1,3 +1,14 @@
+const shimmerKeyframes = `
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+`;
+
+function ShimmerStyle() {
+  return <style>{shimmerKeyframes}</style>;
+}
+
 export function SkeletonLine({
   width,
   height,
@@ -6,22 +17,36 @@ export function SkeletonLine({
   height?: string;
 }) {
   return (
-    <div
-      className="rounded-sm bg-button animate-shimmer"
-      style={{
-        width: width || '100%',
-        height: height || '16px',
-        backgroundImage:
-          'linear-gradient(90deg, var(--color-button) 0px, var(--color-border) 40px, var(--color-button) 80px)',
-        backgroundSize: '200px 100%',
-      }}
-    />
+    <>
+      <ShimmerStyle />
+      <div
+        style={{
+          width: width || '100%',
+          height: height || '16px',
+          borderRadius: '8px',
+          backgroundColor: 'var(--color-button)',
+          backgroundImage:
+            'linear-gradient(90deg, var(--color-button) 0px, var(--color-border) 40px, var(--color-button) 80px)',
+          backgroundSize: '200px 100%',
+          backgroundRepeat: 'no-repeat',
+          animation: 'shimmer 1.5s infinite linear',
+        }}
+      />
+    </>
   );
 }
 
 export function SkeletonCard() {
   return (
-    <div className="bg-fg rounded-lg p-lg mb-md flex flex-col gap-sm">
+    <div style={{
+      backgroundColor: 'var(--color-fg)',
+      borderRadius: '16px',
+      padding: '24px',
+      marginBottom: '16px',
+      display: 'flex',
+      flexDirection: 'column' as const,
+      gap: '8px',
+    }}>
       <SkeletonLine width="60%" height="20px" />
       <SkeletonLine width="100%" height="14px" />
       <SkeletonLine width="80%" height="14px" />
@@ -32,14 +57,29 @@ export function SkeletonCard() {
 export function SkeletonTodoItem() {
   return (
     <div>
+      <ShimmerStyle />
       <SkeletonLine width="40px" height="12px" />
-      <div className="bg-fg rounded-xl p-4 mt-1.5 flex items-center gap-3">
+      <div style={{
+        backgroundColor: 'var(--color-fg)',
+        borderRadius: '12px',
+        padding: '16px',
+        marginTop: '6px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+      }}>
         <div
-          className="w-6 h-6 rounded-full bg-button animate-shimmer shrink-0"
           style={{
+            width: '24px',
+            height: '24px',
+            borderRadius: '9999px',
+            backgroundColor: 'var(--color-button)',
             backgroundImage:
               'linear-gradient(90deg, var(--color-button) 0px, var(--color-border) 40px, var(--color-button) 80px)',
             backgroundSize: '200px 100%',
+            backgroundRepeat: 'no-repeat',
+            animation: 'shimmer 1.5s infinite linear',
+            flexShrink: 0,
           }}
         />
         <SkeletonLine width="60%" height="16px" />

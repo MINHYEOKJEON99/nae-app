@@ -15,11 +15,24 @@ export default function TodoTimeGroup({
   onDelete,
 }: TodoTimeGroupProps) {
   return (
-    <div className="mb-md">
-      <div className="text-[13px] font-semibold text-text-secondary mb-xs pl-[2px]">
+    <div style={{ marginBottom: 16 }}>
+      <div style={{
+        fontSize: 13,
+        fontWeight: 600,
+        color: 'var(--color-text-secondary)',
+        marginBottom: 4,
+        paddingLeft: 2,
+      }}>
         {time}
       </div>
-      <div className="bg-fg rounded-lg px-md py-[2px]">
+      <div style={{
+        backgroundColor: 'var(--color-fg)',
+        borderRadius: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 2,
+        paddingBottom: 2,
+      }}>
         {todos.map((todo) => (
           <TodoItem
             key={todo._id}

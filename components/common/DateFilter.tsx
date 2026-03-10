@@ -31,10 +31,22 @@ export default function DateFilter({ currentDate, todayDate }: DateFilterProps) 
   };
 
   return (
-    <div className="flex items-center gap-sm">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
       <button
         onClick={() => navigate(shiftDate(currentDate, -1))}
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-button text-text-secondary hover:bg-accent hover:text-white transition-colors">
+        style={{
+          width: '32px',
+          height: '32px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '9999px',
+          backgroundColor: 'var(--color-button)',
+          color: 'var(--color-text-secondary)',
+          border: 'none',
+          cursor: 'pointer',
+          transition: 'background-color 0.2s, color 0.2s',
+        }}>
         <svg
           width="16"
           height="16"
@@ -47,15 +59,31 @@ export default function DateFilter({ currentDate, todayDate }: DateFilterProps) 
           <polyline points="15 18 9 12 15 6" />
         </svg>
       </button>
-      <span className="text-body font-medium text-text-primary">{formatKoreanDate(currentDate)}</span>
+      <span style={{
+        fontSize: '14px',
+        lineHeight: '22px',
+        fontWeight: 500,
+        color: 'var(--color-text-primary)',
+      }}>
+        {formatKoreanDate(currentDate)}
+      </span>
       <button
         onClick={() => navigate(shiftDate(currentDate, 1))}
         disabled={isToday}
-        className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors ${
-          isToday
-            ? "bg-button text-text-secondary opacity-30 cursor-not-allowed"
-            : "bg-button text-text-secondary hover:bg-accent hover:text-white"
-        }`}>
+        style={{
+          width: '32px',
+          height: '32px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '9999px',
+          backgroundColor: 'var(--color-button)',
+          color: 'var(--color-text-secondary)',
+          border: 'none',
+          cursor: isToday ? 'not-allowed' : 'pointer',
+          opacity: isToday ? 0.3 : 1,
+          transition: 'background-color 0.2s, color 0.2s',
+        }}>
         <svg
           width="16"
           height="16"

@@ -7,13 +7,33 @@ interface ErrorProps {
 
 export default function TrendsError({ error, reset }: ErrorProps) {
   return (
-    <div className="flex flex-col items-center justify-center py-xl gap-md">
-      <p className="text-body text-text-secondary">
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: 32,
+      paddingBottom: 32,
+      gap: 16,
+    }}>
+      <p style={{ fontSize: 14, lineHeight: '22px', color: 'var(--color-text-secondary)' }}>
         기사를 불러오는 중 오류가 발생했습니다.
       </p>
       <button
         onClick={reset}
-        className="py-[10px] px-[20px] bg-accent text-white rounded-md text-[14px] font-semibold"
+        style={{
+          paddingTop: 10,
+          paddingBottom: 10,
+          paddingLeft: 20,
+          paddingRight: 20,
+          backgroundColor: 'var(--color-accent)',
+          color: '#fff',
+          borderRadius: 12,
+          fontSize: 14,
+          fontWeight: 600,
+          border: 'none',
+          cursor: 'pointer',
+        }}
       >
         다시 시도
       </button>

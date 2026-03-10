@@ -16,7 +16,7 @@ export default async function TodoPage({ searchParams }: Props) {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Header title="Todo" />
         <DateFilter currentDate={currentDate} todayDate={todayKST} />
       </div>

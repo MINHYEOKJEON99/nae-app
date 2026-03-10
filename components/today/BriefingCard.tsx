@@ -6,8 +6,8 @@ interface BriefingCardProps {
 
 export default function BriefingCard({ intro }: BriefingCardProps) {
   return (
-    <div className="bg-fg rounded-lg p-lg mb-md">
-      <span className="inline-block text-caption text-accent font-semibold mb-md">
+    <div style={{ background: 'var(--color-fg)', borderRadius: 16, padding: 24, marginBottom: 16 }}>
+      <span style={{ display: 'inline-block', fontSize: 12, lineHeight: '18px', color: 'var(--color-accent)', fontWeight: 600, marginBottom: 16 }}>
         오늘의 브리핑
       </span>
       <Markdown content={intro} />

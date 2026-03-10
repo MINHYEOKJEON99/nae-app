@@ -16,14 +16,23 @@ export default function TabItem({ href, label, icon }: TabItemProps) {
   return (
     <Link
       href={href}
-      className={`flex flex-col items-center gap-[2px] flex-1 py-xs no-underline transition-colors duration-150 [-webkit-tap-highlight-color:transparent] ${
-        active
-          ? 'text-text-primary font-semibold'
-          : 'text-text-secondary font-normal'
-      }`}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 2,
+        flex: 1,
+        paddingTop: 4,
+        paddingBottom: 4,
+        textDecoration: 'none',
+        transition: 'color 150ms',
+        WebkitTapHighlightColor: 'transparent',
+        color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+        fontWeight: active ? 600 : 400,
+      }}
     >
       {icon}
-      <span className="text-[11px] leading-[14px]">{label}</span>
+      <span style={{ fontSize: 11, lineHeight: '14px' }}>{label}</span>
     </Link>
   );
 }

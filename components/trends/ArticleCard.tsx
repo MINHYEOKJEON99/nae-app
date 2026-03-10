@@ -14,27 +14,54 @@ export default function ArticleCard({ article, variant, rank }: ArticleCardProps
         href={article.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="block bg-fg rounded-lg p-lg mb-md no-underline">
-        <div className="flex items-start gap-md mb-sm">
-          <span className="shrink-0 text-[18px] font-bold text-accent min-w-[24px]">{rank}</span>
-          <h3 className="text-[15px] font-semibold leading-[1.4] text-text-primary word-keep-all flex-1">
+        style={{
+          display: 'block',
+          backgroundColor: 'var(--color-fg)',
+          borderRadius: '8px',
+          padding: '24px',
+          marginBottom: '16px',
+          textDecoration: 'none',
+        }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '8px' }}>
+          <span style={{ flexShrink: 0, fontSize: '18px', fontWeight: 'bold', color: 'var(--color-accent)', minWidth: '24px' }}>{rank}</span>
+          <h3 style={{ fontSize: '15px', fontWeight: 600, lineHeight: 1.4, color: 'var(--color-text-primary)', wordBreak: 'keep-all', flex: 1 }}>
             {article.title}
           </h3>
         </div>
-        <p className="text-[13px] leading-[1.5] line-clamp-3 text-text-secondary mb-sm word-keep-all">
+        <p style={{
+          fontSize: '13px',
+          lineHeight: 1.5,
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          color: 'var(--color-text-secondary)',
+          marginBottom: '8px',
+          wordBreak: 'keep-all',
+        }}>
           {article.aiSummaryShort}
         </p>
-        <div className="flex items-center gap-[6px] flex-wrap">
-          <span className={`text-[10px] font-semibold py-[2px] px-[6px] rounded-full ${
-            article.category === "global"
-              ? "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300"
-              : "bg-emerald-100 text-emerald-600 dark:bg-emerald-900 dark:text-emerald-300"
-          }`}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+          <span style={{
+            fontSize: '10px',
+            fontWeight: 600,
+            padding: '2px 6px',
+            borderRadius: '9999px',
+            ...(article.category === "global"
+              ? { backgroundColor: '#dbeafe', color: '#2563eb' }
+              : { backgroundColor: '#d1fae5', color: '#059669' }),
+          }}>
             {article.category === "global" ? "Global" : "Ko"}
           </span>
           {article.isHot && <HotBadge />}
           {article.keywords.slice(0, 3).map((kw) => (
-            <span key={kw} className="text-[11px] py-[3px] px-[8px] bg-button rounded-full text-text-secondary">
+            <span key={kw} style={{
+              fontSize: '11px',
+              padding: '3px 8px',
+              backgroundColor: 'var(--color-button)',
+              borderRadius: '9999px',
+              color: 'var(--color-text-secondary)',
+            }}>
               {kw}
             </span>
           ))}
@@ -48,22 +75,51 @@ export default function ArticleCard({ article, variant, rank }: ArticleCardProps
       href={article.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-md bg-fg rounded-md p-md mb-sm no-underline">
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-[6px] mb-[4px]">
-          <span className={`text-[10px] font-semibold py-[2px] px-[6px] rounded-full ${
-            article.category === "global"
-              ? "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300"
-              : "bg-emerald-100 text-emerald-600 dark:bg-emerald-900 dark:text-emerald-300"
-          }`}>
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '16px',
+        backgroundColor: 'var(--color-fg)',
+        borderRadius: '12px',
+        padding: '16px',
+        marginBottom: '8px',
+        textDecoration: 'none',
+      }}>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+          <span style={{
+            fontSize: '10px',
+            fontWeight: 600,
+            padding: '2px 6px',
+            borderRadius: '9999px',
+            ...(article.category === "global"
+              ? { backgroundColor: '#dbeafe', color: '#2563eb' }
+              : { backgroundColor: '#d1fae5', color: '#059669' }),
+          }}>
             {article.category === "global" ? "Global" : "Ko"}
           </span>
           {article.isHot && <HotBadge />}
         </div>
-        <h4 className="text-[14px] font-medium text-text-primary leading-[1.4] mb-[4px] word-keep-all">
+        <h4 style={{
+          fontSize: '14px',
+          fontWeight: 500,
+          color: 'var(--color-text-primary)',
+          lineHeight: 1.4,
+          marginBottom: '4px',
+          wordBreak: 'keep-all',
+        }}>
           {article.title}
         </h4>
-        <p className="text-[12px] line-clamp-3 text-text-tertiary">{article.aiSummaryShort}</p>
+        <p style={{
+          fontSize: '12px',
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          color: 'var(--color-text-tertiary)',
+        }}>
+          {article.aiSummaryShort}
+        </p>
       </div>
     </a>
   );

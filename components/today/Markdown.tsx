@@ -1,40 +1,41 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 interface MarkdownProps {
   content: string;
-  className?: string;
+  style?: CSSProperties;
 }
 
-export default function Markdown({ content, className = "" }: MarkdownProps) {
+export default function Markdown({ content, style = {} }: MarkdownProps) {
   return (
-    <div className={className}>
+    <div style={style}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           p: ({ children }) => (
-            <p className="text-body leading-[1.8] text-text-primary mb-sm word-keep-all">
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--color-text-primary)', marginBottom: 8, wordBreak: 'keep-all' }}>
               {children}
             </p>
           ),
           strong: ({ children }) => (
-            <strong className="font-semibold text-accent">{children}</strong>
+            <strong style={{ fontWeight: 600, color: 'var(--color-accent)' }}>{children}</strong>
           ),
           ul: ({ children }) => (
-            <ul className="list-disc pl-lg mb-sm space-y-xs">{children}</ul>
+            <ul style={{ listStyleType: 'disc', paddingLeft: 24, marginBottom: 8, display: 'flex', flexDirection: 'column', gap: 4 }}>{children}</ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal pl-lg mb-sm space-y-xs">{children}</ol>
+            <ol style={{ listStyleType: 'decimal', paddingLeft: 24, marginBottom: 8, display: 'flex', flexDirection: 'column', gap: 4 }}>{children}</ol>
           ),
           li: ({ children }) => (
-            <li className="text-body leading-[1.6] text-text-primary word-keep-all">
+            <li style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-text-primary)', wordBreak: 'keep-all' }}>
               {children}
             </li>
           ),
           h3: ({ children }) => (
-            <h3 className="text-subheading font-semibold text-text-primary mb-xs">
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>
               {children}
             </h3>
           ),
