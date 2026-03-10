@@ -3,63 +3,45 @@ interface IconProps {
   color?: string;
 }
 
-export function BriefingIcon({ size = 24, color = 'currentColor' }: IconProps) {
+export function BriefingIcon({ size = 24, color = "currentColor" }: IconProps) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 4h16v16H4z" />
-      <path d="M8 8h8" />
-      <path d="M8 12h6" />
-      <path d="M8 16h4" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21.0659 8.20407L12.6189 1.48707C12.4422 1.34623 12.2229 1.26953 11.9969 1.26953C11.7709 1.26953 11.5516 1.34623 11.3749 1.48707L2.92688 8.20407C2.69143 8.39135 2.50126 8.62933 2.37054 8.90029C2.23982 9.17126 2.17191 9.46822 2.17188 9.76907V19.1871C2.17188 19.8236 2.42473 20.434 2.87482 20.8841C3.32491 21.3342 3.93536 21.5871 4.57187 21.5871H9.99687V16.8351C9.99687 16.5699 10.1022 16.3155 10.2898 16.128C10.4773 15.9404 10.7317 15.8351 10.9969 15.8351H12.9969C13.2621 15.8351 13.5164 15.9404 13.704 16.128C13.8915 16.3155 13.9969 16.5699 13.9969 16.8351V21.5871H19.4209C20.0574 21.5871 20.6678 21.3342 21.1179 20.8841C21.568 20.434 21.8209 19.8236 21.8209 19.1871V9.77007C21.8208 9.46922 21.7529 9.17226 21.6222 8.90129C21.4915 8.63033 21.3013 8.39135 21.0659 8.20407Z"
+        fill={color}
+      />
     </svg>
   );
 }
 
-export function TrendIcon({ size = 24, color = 'currentColor' }: IconProps) {
+export function TrendIcon({ size = 24, color = "currentColor" }: IconProps) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-      <polyline points="16 7 22 7 22 13" />
+    <svg width={size} height={size} viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M10.702 5.50982L7.71 2.87282C7.531 2.71505 7.3006 2.628 7.062 2.628C6.8234 2.628 6.593 2.71505 6.414 2.87282L0.332 8.23282C0.227683 8.32476 0.144128 8.43786 0.0868862 8.56458C0.0296442 8.69131 2.61572e-05 8.82876 0 8.96782V16.4498C0 16.9696 0.206499 17.4682 0.574071 17.8357C0.941642 18.2033 1.44018 18.4098 1.96 18.4098H17.64C18.1598 18.4098 18.6584 18.2033 19.0259 17.8357C19.3935 17.4682 19.6 16.9696 19.6 16.4498V0.979816C19.6 0.791257 19.5455 0.606712 19.4432 0.448316C19.3409 0.28992 19.1951 0.164399 19.0233 0.0868108C18.8514 0.00922218 18.6608 -0.0171401 18.4743 0.010886C18.2879 0.038912 18.1135 0.120136 17.972 0.244816L11.998 5.50982C11.819 5.66758 11.5886 5.75463 11.35 5.75463C11.1114 5.75463 10.881 5.66758 10.702 5.50982Z"
+        fill={color}
+      />
     </svg>
   );
 }
 
-export function SettingsIcon({ size = 24, color = 'currentColor' }: IconProps) {
+export function SettingsIcon({ size = 24, color = "currentColor" }: IconProps) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="3" />
-      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+    <svg width={size} height={size} viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3" fill={color} />
+      <path
+        fill={color}
+        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"
+      />
     </svg>
   );
 }
 
-export function SunIcon({ size = 24, color = 'currentColor' }: IconProps) {
+export function SunIcon({ size = 24, color = "currentColor" }: IconProps) {
   return (
     <svg
       width={size}
@@ -69,8 +51,7 @@ export function SunIcon({ size = 24, color = 'currentColor' }: IconProps) {
       stroke={color}
       strokeWidth={1.8}
       strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+      strokeLinejoin="round">
       <circle cx="12" cy="12" r="5" />
       <line x1="12" y1="1" x2="12" y2="3" />
       <line x1="12" y1="21" x2="12" y2="23" />
@@ -84,7 +65,7 @@ export function SunIcon({ size = 24, color = 'currentColor' }: IconProps) {
   );
 }
 
-export function MoonIcon({ size = 24, color = 'currentColor' }: IconProps) {
+export function MoonIcon({ size = 24, color = "currentColor" }: IconProps) {
   return (
     <svg
       width={size}
@@ -94,27 +75,23 @@ export function MoonIcon({ size = 24, color = 'currentColor' }: IconProps) {
       stroke={color}
       strokeWidth={1.8}
       strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+      strokeLinejoin="round">
       <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
     </svg>
   );
 }
 
-export function TodoIcon({ size = 24, color = 'currentColor' }: IconProps) {
+export function TodoIcon({ size = 24, color = "currentColor" }: IconProps) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M9 11l3 3L22 4" />
-      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+    <svg width={size} height={size} viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.2203 21.0001H2.82034C1.12034 21.0001 -0.179662 19.5001 0.0203385 17.8001L1.52034 6.5001C1.62034 5.7001 2.32034 5.1001 3.12034 5.1001H16.9203C17.7203 5.1001 18.4203 5.7001 18.5203 6.5001L20.0203 17.8001C20.2203 19.5001 18.9203 21.0001 17.2203 21.0001Z"
+        fill={color}
+      />
+      <path
+        d="M9.72041 1.8H10.3204C12.2204 1.8 13.7204 3.3 13.8204 5.1H15.6204C15.5204 2.3 13.2204 0 10.3204 0H9.72041C6.82041 0 4.52041 2.3 4.42041 5.1H6.22041C6.32041 3.2 7.82041 1.8 9.72041 1.8Z"
+        fill={color}
+      />
     </svg>
   );
 }
