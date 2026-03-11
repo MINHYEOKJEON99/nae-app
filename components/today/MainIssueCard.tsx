@@ -12,12 +12,12 @@ interface MainIssueCardProps {
 
 export default function MainIssueCard({ issue, index }: MainIssueCardProps) {
   return (
-    <div
-      style={{ background: colors.fg, borderRadius: 16, paddingTop: 24, paddingBottom: 24, marginBottom: 16 }}>
+    <div style={{ marginBottom: 16 }}>
       <div
         style={{
-          paddingLeft: 24,
-          paddingRight: 24,
+          padding: 24,
+          background: colors.fg,
+          borderRadius: 16,
         }}>
         <div
           style={{

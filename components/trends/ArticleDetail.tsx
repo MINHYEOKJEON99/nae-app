@@ -1,6 +1,8 @@
 "use client";
 
-import { Post } from "@toss/tds-mobile";
+import { useState } from "react";
+import { BottomCTA, Post, ConfirmDialog } from "@toss/tds-mobile";
+import { openURL } from "@apps-in-toss/web-framework";
 import { colors } from "@/lib/theme";
 
 interface ArticleDetailProps {
@@ -37,6 +39,15 @@ function ensureEnding(text: string): string {
 }
 
 export default function ArticleDetail({ article }: ArticleDetailProps) {
+  const [showDialog, setShowDialog] = useState(false);
+
+  const handleOpenDialog = () => setShowDialog(true);
+  const handleCloseDialog = () => setShowDialog(false);
+  const handleNavigate = () => {
+    openURL(article.url);
+    setShowDialog(false);
+  };
+
   return (
     <div>
       <Post.H1 paddingBottom={8}>{article.title}</Post.H1>
@@ -87,23 +98,17 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
 
       <Post.Hr paddingBottom={24} />
 
-      <a
-        href={article.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          display: "block",
-          textAlign: "center",
-          padding: "14px 0",
-          backgroundColor: colors.accent,
-          color: "#fff",
-          borderRadius: 12,
-          fontSize: 15,
-          fontWeight: 600,
-          textDecoration: "none",
-        }}>
-        원문 보기
-      </a>
+      {/* @ts-expect-error framer-motion type mismatch with React 19 */}
+      <BottomCTA.Single onClick={handleOpenDialog}>원문보기</BottomCTA.Single>
+
+      <ConfirmDialog
+        open={showDialog}
+        onClose={handleCloseDialog}
+        title="외부 페이지 이동"
+        description="확인 버튼을 누르면 외부 브라우저로 이동합니다. 이동하시겠습니까?"
+        cancelButton={<ConfirmDialog.CancelButton onClick={handleCloseDialog}>닫기</ConfirmDialog.CancelButton>}
+        confirmButton={<ConfirmDialog.ConfirmButton onClick={handleNavigate}>이동하기</ConfirmDialog.ConfirmButton>}
+      />
     </div>
   );
 }
