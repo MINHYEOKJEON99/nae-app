@@ -15,7 +15,7 @@ from pymongo import MongoClient
 import google.generativeai as genai
 
 KST = timezone(timedelta(hours=9))
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.1-flash-lite-preview"
 
 
 def get_db():
