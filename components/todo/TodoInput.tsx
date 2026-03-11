@@ -73,13 +73,12 @@ export default function TodoInput({ onAdd }: TodoInputProps) {
           추가
         </button>
       </form>
-      {showModal && (
-        <TimePickerModal
-          onConfirm={handleTimeConfirm}
-          onSkip={handleSkipTime}
-          onCancel={() => setShowModal(false)}
-        />
-      )}
+      <TimePickerModal
+        open={showModal}
+        onConfirm={handleTimeConfirm}
+        onSkip={handleSkipTime}
+        onCancel={() => setShowModal(false)}
+      />
     </>
   );
 }

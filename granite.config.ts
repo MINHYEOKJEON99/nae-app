@@ -8,7 +8,7 @@ export default defineConfig({
     icon: "/newspaper_icon_logo_600_1.png",
   },
   web: {
-    host: "192.168.45.123",
+    host: "192.168.45.204",
     port: 5173,
     commands: {
       dev: "next dev --port 5173",

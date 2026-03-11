@@ -35,7 +35,11 @@
       "Bash(pod install:*)",
       "Bash(lsof:*)",
       "Bash(gh api:*)",
-      "WebFetch(domain:tossmini-docs.toss.im)"
+      "WebFetch(domain:tossmini-docs.toss.im)",
+      "Bash(echo exit: $?:*)",
+      "Bash(grep:*)",
+      "Bash(npx tsc:*)",
+      "Bash(crawler/.venv/bin/python:*)"
     ]
   }
 }

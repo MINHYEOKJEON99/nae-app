@@ -14,6 +14,7 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
+import type { Todo } from '@/types/todo';
 import {
   fetchTodos,
   createTodo,
@@ -39,10 +40,21 @@ export function useTodos(date: string, userId: string) {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: key }),
   });
 
-  /** 완료 상태 토글 → 성공 시 목록 재조회 */
+  /** 완료 상태 토글 — 낙관적 업데이트 */
   const toggleTodo = useMutation({
     mutationFn: toggleTodoApi,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: key }),
+    onMutate: async (id: string) => {
+      await queryClient.cancelQueries({ queryKey: key });
+      const previous = queryClient.getQueryData<Todo[]>(key);
+      queryClient.setQueryData<Todo[]>(key, (old) =>
+        old?.map((t) => (t._id === id ? { ...t, completed: !t.completed } : t))
+      );
+      return { previous };
+    },
+    onError: (_err, _id, context) => {
+      if (context?.previous) queryClient.setQueryData(key, context.previous);
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: key }),
   });
 
   /** Todo 삭제 → 성공 시 목록 재조회 */
