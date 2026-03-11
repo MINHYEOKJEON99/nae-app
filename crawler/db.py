@@ -29,9 +29,14 @@ def get_db():
 
 
 def ensure_indexes():
-    """raw_articles 컬렉션에 url unique 인덱스 생성"""
+    """raw_articles, articles, daily_briefings 컬렉션 인덱스 생성 + TTL 7일"""
     db = get_db()
     db.raw_articles.create_index("url", unique=True)
+    # 7일(604800초) 후 자동 삭제
+    db.raw_articles.create_index("createdAt", expireAfterSeconds=604800)
+    db.articles.create_index("createdAt", expireAfterSeconds=604800)
+    db.daily_briefings.create_index("createdAt", expireAfterSeconds=604800)
+    db.todos.create_index("createdAt", expireAfterSeconds=604800)
 
 
 def upsert_articles(articles: list[dict]) -> dict:
