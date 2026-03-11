@@ -6,7 +6,7 @@ import ClosingSummary from "@/components/today/ClosingSummary";
 import KeywordChips from "@/components/today/KeywordChips";
 import { getBriefing } from "@/lib/data";
 import { colors } from "@/lib/theme";
-import { getKSTDateString, getKSTYesterdayString } from "@/lib/format";
+import { getKSTDateString } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -19,12 +19,7 @@ export default async function TodayPage({ searchParams }: Props) {
   const todayKST = getKSTDateString();
   const currentDate = date || todayKST;
 
-  let briefing = await getBriefing(currentDate);
-
-  // 특정 날짜 지정이 없고 오늘 데이터가 없으면 전날 fallback
-  if (!date && !briefing) {
-    briefing = await getBriefing(getKSTYesterdayString());
-  }
+  const briefing = await getBriefing(currentDate);
 
   return (
     <div>
@@ -40,7 +35,7 @@ export default async function TodayPage({ searchParams }: Props) {
           <KeywordChips keywords={briefing.keywords} />
         </>
       ) : (
-        <p style={{ color: colors.textSecondary, fontSize: 14 }}>해당 날짜의 브리핑이 없습니다.</p>
+        <p style={{ color: colors.textSecondary, fontSize: 14 }}>데이터가 아직 없어요.</p>
       )}
     </div>
   );
