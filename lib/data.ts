@@ -51,3 +51,17 @@ export async function getArticles(
 
   return { articles, hasMore: limit < total };
 }
+
+/**
+ * 단일 기사 상세 조회 — 없으면 null 반환
+ * Server Component에서 사용
+ */
+export async function getArticle(id: string): Promise<Article | null> {
+  const { ObjectId } = await import('mongodb');
+  if (!ObjectId.isValid(id)) return null;
+  const db = await getDb();
+  const doc = await db.collection('articles').findOne({ _id: new ObjectId(id) });
+  if (!doc) return null;
+  const { _id, ...rest } = doc;
+  return { ...rest, _id: _id.toString() } as Article;
+}

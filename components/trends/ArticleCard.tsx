@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Article } from "@/types/article";
 import HotBadge from "./HotBadge";
 
@@ -10,10 +11,8 @@ interface ArticleCardProps {
 export default function ArticleCard({ article, variant, rank }: ArticleCardProps) {
   if (variant === "ranked") {
     return (
-      <a
-        href={article.url}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        href={`/trends/${article._id}`}
         className="block bg-fg rounded-lg p-lg mb-md no-underline">
         <div className="flex items-start gap-md mb-sm">
           <span className="shrink-0 text-[18px] font-bold text-accent min-w-[24px]">{rank}</span>
@@ -39,15 +38,13 @@ export default function ArticleCard({ article, variant, rank }: ArticleCardProps
             </span>
           ))}
         </div>
-      </a>
+      </Link>
     );
   }
 
   return (
-    <a
-      href={article.url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/trends/${article._id}`}
       className="flex items-center gap-md bg-fg rounded-md p-md mb-sm no-underline">
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-[6px] mb-[4px]">
@@ -65,6 +62,6 @@ export default function ArticleCard({ article, variant, rank }: ArticleCardProps
         </h4>
         <p className="text-[12px] line-clamp-3 text-text-tertiary">{article.aiSummaryShort}</p>
       </div>
-    </a>
+    </Link>
   );
 }
