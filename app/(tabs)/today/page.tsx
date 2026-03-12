@@ -26,7 +26,7 @@ function TodayContent() {
   const todayKST = getKSTDateString();
   const currentDate = searchParams.get('date') || todayKST;
 
-  const { data: briefing, isLoading, isError, refetch } = useBriefing(currentDate);
+  const { data: briefing, isLoading, isError, error, refetch } = useBriefing(currentDate);
 
   return (
     <div>

@@ -6,8 +6,7 @@
 import type { Article } from '@/types/article';
 import type { DailyBriefing } from '@/types/briefing';
 import type { Todo } from '@/types/todo';
-
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? '';
+import { API_BASE } from './apiBase';
 
 /** 기사 목록 페이지네이션 조회 */
 export async function fetchArticles(page: number, date: string, pageSize = 20): Promise<{ items: Article[]; hasMore: boolean }> {
@@ -43,7 +42,7 @@ export async function fetchTodos(date: string, userId: string): Promise<Todo[]> 
 export async function createTodo(
   todo: Omit<Todo, '_id' | 'createdAt'>
 ): Promise<Todo> {
-  const res = await fetch('/api/todos', {
+  const res = await fetch(`${API_BASE}/api/todos`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(todo),
