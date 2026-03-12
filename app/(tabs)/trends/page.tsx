@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import DateFilter from '@/components/common/DateFilter';
 import TrendsFeed from '@/components/trends/TrendsFeed';
+import ArticleDetailView from '@/components/trends/ArticleDetailView';
 import { getKSTDateString } from '@/lib/format';
 
 export default function TrendsPage() {
@@ -19,6 +20,11 @@ function TrendsContent() {
   const searchParams = useSearchParams();
   const todayKST = getKSTDateString();
   const currentDate = searchParams.get('date') || todayKST;
+  const articleId = searchParams.get('id');
+
+  if (articleId) {
+    return <ArticleDetailView articleId={articleId} />;
+  }
 
   return (
     <div>

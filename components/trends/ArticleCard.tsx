@@ -10,7 +10,7 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, variant, rank }: ArticleCardProps) {
-  const href = `/trends/${article._id}`;
+  const href = `/trends?id=${article._id}`;
 
   if (variant === "ranked") {
     return (

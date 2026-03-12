@@ -5,7 +5,7 @@ import ArticleDetail from '@/components/trends/ArticleDetail';
 import { SkeletonCard } from '@/components/common/Skeleton';
 import { colors } from '@/lib/theme';
 
-export default function ArticleDetailClient({ articleId }: { articleId: string }) {
+export default function ArticleDetailView({ articleId }: { articleId: string }) {
   const { data: article, isLoading, isError, refetch } = useArticle(articleId);
 
   if (isLoading) {
