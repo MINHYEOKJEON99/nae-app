@@ -1,22 +1,28 @@
-import Header from "@/components/layout/Header";
-import DateFilter from "@/components/common/DateFilter";
-import TodoContent from "@/components/todo/TodoContent";
-import { getKSTDateString } from "@/lib/format";
+'use client';
 
-export const dynamic = "force-dynamic";
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Header from '@/components/layout/Header';
+import DateFilter from '@/components/common/DateFilter';
+import TodoContent from '@/components/todo/TodoContent';
+import { getKSTDateString } from '@/lib/format';
 
-interface Props {
-  searchParams: Promise<{ date?: string }>;
+export default function TodoPage() {
+  return (
+    <Suspense>
+      <TodoPageContent />
+    </Suspense>
+  );
 }
 
-export default async function TodoPage({ searchParams }: Props) {
-  const { date } = await searchParams;
+function TodoPageContent() {
+  const searchParams = useSearchParams();
   const todayKST = getKSTDateString();
-  const currentDate = date || todayKST;
+  const currentDate = searchParams.get('date') || todayKST;
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Header title="할 일" />
         <DateFilter currentDate={currentDate} todayDate={todayKST} />
       </div>

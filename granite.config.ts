@@ -8,13 +8,13 @@ export default defineConfig({
     icon: "/newspaper_icon_logo_600_1.png",
   },
   web: {
-    host: "192.168.45.204",
+    host: "192.168.45.186",
     port: 5173,
     commands: {
       dev: "next dev --port 5173",
-      build: "next build",
+      build: "tsx scripts/build-static.ts",
     },
   },
   permissions: [],
-  outdir: "dist",
+  outdir: "out",
 });

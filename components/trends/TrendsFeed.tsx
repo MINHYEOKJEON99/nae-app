@@ -3,32 +3,24 @@
 import { useRef, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import type { Article } from "@/types/article";
+import { fetchArticles } from "@/lib/api";
 import { colors } from "@/lib/theme";
+import { SkeletonCard } from "@/components/common/Skeleton";
 import ArticleCard from "./ArticleCard";
 
 interface TrendsFeedProps {
-  initialArticles: Article[];
   date: string;
-  hasMore: boolean;
 }
 
-async function fetchArticles({ pageParam, date }: { pageParam: number; date: string }) {
-  const res = await fetch(`/api/articles?page=${pageParam}&pageSize=20&date=${date}`);
-  return res.json() as Promise<{ items: Article[]; hasMore: boolean }>;
-}
-
-export default function TrendsFeed({ initialArticles, date, hasMore: initialHasMore }: TrendsFeedProps) {
+export default function TrendsFeed({ date }: TrendsFeedProps) {
   const observerRef = useRef<HTMLDivElement>(null);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["articles", date],
-    queryFn: ({ pageParam }) => fetchArticles({ pageParam, date }),
-    initialPageParam: 1,
-    initialData: {
-      pages: [{ items: initialArticles, hasMore: initialHasMore }],
-      pageParams: [1],
-    },
-    getNextPageParam: (lastPage, _, lastPageParam) => (lastPage.hasMore ? (lastPageParam as number) + 1 : undefined),
+    queryFn: ({ pageParam }) => fetchArticles(pageParam, date),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _, lastPageParam) =>
+      lastPage.hasMore ? (lastPageParam as number) + 1 : undefined,
   });
 
   useEffect(() => {
@@ -46,7 +38,22 @@ export default function TrendsFeed({ initialArticles, date, hasMore: initialHasM
     return () => observer.disconnect();
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  if (isLoading) {
+    return (
+      <>
+        <SkeletonCard />
+        <SkeletonCard />
+        <SkeletonCard />
+      </>
+    );
+  }
+
   const articles = data?.pages.flatMap((p) => p.items) ?? [];
+
+  if (articles.length === 0) {
+    return <p style={{ color: colors.textSecondary, fontSize: 14 }}>뉴스가 아직 없어요.</p>;
+  }
+
   const hasSummary = (a: Article) => a.aiSummaryShort && a.aiSummaryShort !== a.title;
   const withSummary = articles.filter(hasSummary);
   const noSummary = articles.filter((a) => !hasSummary(a));
