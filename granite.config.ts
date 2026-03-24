@@ -8,7 +8,7 @@ export default defineConfig({
     icon: "https://static.toss.im/appsintoss/27519/51596f09-675c-4483-a453-a8386c604fc2.png",
   },
   web: {
-    host: "192.168.123.108",
+    host: "192.168.45.79",
     port: 5173,
     commands: {
       dev: "next dev --port 5173",
