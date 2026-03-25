@@ -44,7 +44,8 @@
       "Bash(ls \"/Users/jeonminhyeok/pp/nae-app/app/\\(tabs\\)/trends/[articleId]/\")",
       "Bash(mv app/api app/_api_backup 2>/dev/null; npx next build 2>&1; status=$?; mv app/_api_backup app/api 2>/dev/null; exit $status)",
       "WebFetch(domain:nae-app-six.vercel.app)",
-      "WebFetch(domain:developers-apps-in-toss.toss.im)"
+      "WebFetch(domain:developers-apps-in-toss.toss.im)",
+      "Bash(npx tsx:*)"
     ]
   }
 }
