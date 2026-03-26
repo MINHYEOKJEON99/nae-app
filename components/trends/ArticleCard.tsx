@@ -57,9 +57,9 @@ export default function ArticleCard({ article, variant, rank }: ArticleCardProps
           </span>
           {article.isHot && <HotBadge />}
         </div>
-        <h4 className="text-[14px] font-medium text-text-primary leading-[1.4] mb-[4px] word-keep-all">
+        <h3 className="text-[14px] font-medium text-text-primary leading-[1.4] mb-[4px] word-keep-all">
           {article.title}
-        </h4>
+        </h3>
         <p className="text-[12px] line-clamp-3 text-text-tertiary">{article.aiSummaryShort}</p>
       </div>
     </Link>

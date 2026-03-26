@@ -13,9 +13,9 @@ export default function MainIssueCard({ issue, index }: MainIssueCardProps) {
         <div className="shrink-0 w-7 h-7 rounded-full bg-accent text-white text-[13px] font-bold flex items-center justify-center">
           {index + 1}
         </div>
-        <h3 className="text-subheading font-semibold leading-subheading text-text-primary word-keep-all">
+        <h2 className="text-subheading font-semibold leading-subheading text-text-primary word-keep-all">
           {issue.title}
-        </h3>
+        </h2>
       </div>
       <Markdown content={issue.summary} />
       <div className="bg-button rounded-md p-md mt-md">

@@ -33,6 +33,7 @@ export default function DateFilter({ currentDate, todayDate }: DateFilterProps) 
   return (
     <div className="flex items-center gap-sm">
       <button
+        aria-label="이전 날짜"
         onClick={() => navigate(shiftDate(currentDate, -1))}
         className="w-8 h-8 flex items-center justify-center rounded-full bg-button text-text-secondary hover:bg-accent hover:text-white transition-colors">
         <svg
@@ -49,6 +50,7 @@ export default function DateFilter({ currentDate, todayDate }: DateFilterProps) 
       </button>
       <span className="text-body font-medium text-text-primary">{formatKoreanDate(currentDate)}</span>
       <button
+        aria-label="다음 날짜"
         onClick={() => navigate(shiftDate(currentDate, 1))}
         disabled={isToday}
         className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors ${
