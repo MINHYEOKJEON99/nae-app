@@ -35,7 +35,8 @@
       "Bash(pod install:*)",
       "Bash(lsof:*)",
       "Bash(gh api:*)",
-      "Bash(grep -r aria-label /c/Users/nae-app/components --include=*.tsx --include=*.ts)"
+      "Bash(grep -r aria-label /c/Users/nae-app/components --include=*.tsx --include=*.ts)",
+      "Bash(grep -E '\\\\.\\(config|json|mjs|ts\\)$|^d')"
     ]
   }
 }
