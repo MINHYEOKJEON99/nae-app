@@ -3,8 +3,8 @@
 - 태그 기반 확장 구조 (IT, 주식)
 - 소스별 카테고리(global/korea) + 태그(IT/주식) 매핑
 
-IT 글로벌: RSS 50 / IT 한국: 60
-주식 글로벌: 40 / 주식 한국: 50
+IT 글로벌: RSS 50 / IT 한국: 45
+주식 글로벌: 50 / 주식 한국: 30
 """
 
 # ── IT 글로벌 RSS 피드 ───────────────────────────
@@ -22,22 +22,19 @@ RSS_ITEMS_PER_FEED = 10
 KOREA_FEEDS = [
     ("https://yozm.wishket.com/magazine/feed/", "요즘IT", 30),
     ("https://www.itworld.co.kr/rss/", "ITWorld Korea", 15),
-    ("https://byline.network/feed/", "Byline Network", 15),
 ]
 
 # ── 주식 글로벌 RSS 피드 ─────────────────────────
 STOCK_FEEDS = [
-    ("https://feeds.marketwatch.com/marketwatch/marketpulse", "MarketWatch", 10),
+    ("https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=20910258", "CNBC", 15),
+    ("https://feeds.bloomberg.com/markets/news.rss", "Bloomberg", 15),
     ("https://finance.yahoo.com/news/rssindex", "Yahoo Finance", 10),
     ("https://seekingalpha.com/market_currents.xml", "Seeking Alpha", 10),
-    ("https://www.investing.com/rss/news.rss", "Investing.com", 10),
 ]
 
 # ── 주식 한국 RSS 피드 ───────────────────────────
 KOREA_STOCK_FEEDS = [
-    ("https://www.hankyung.com/feed/finance", "한국경제", 20),
-    ("https://www.mk.co.kr/rss/30000001/", "매일경제", 15),
-    ("https://biz.chosun.com/svc/rss/www/rss.xml", "조선비즈", 15),
+    ("https://www.hankyung.com/feed/finance", "한국경제", 30),
 ]
 
 # ── 소스 → 카테고리·태그 매핑 ─────────────────────
@@ -48,15 +45,12 @@ SOURCE_META = {
     "rss":             {"category": "global", "tags": ["IT"]},
     "요즘IT":           {"category": "korea",  "tags": ["IT"]},
     "ITWorld Korea":    {"category": "korea",  "tags": ["IT"]},
-    "Byline Network":  {"category": "korea",  "tags": ["IT"]},
     # 주식
-    "MarketWatch":     {"category": "global", "tags": ["주식"]},
+    "CNBC":            {"category": "global", "tags": ["주식"]},
+    "Bloomberg":       {"category": "global", "tags": ["주식"]},
     "Yahoo Finance":   {"category": "global", "tags": ["주식"]},
     "Seeking Alpha":   {"category": "global", "tags": ["주식"]},
-    "Investing.com":   {"category": "global", "tags": ["주식"]},
     "한국경제":         {"category": "korea",  "tags": ["주식"]},
-    "매일경제":         {"category": "korea",  "tags": ["주식"]},
-    "조선비즈":         {"category": "korea",  "tags": ["주식"]},
 }
 
 # 하위 호환용 (기존 코드에서 SOURCE_CATEGORY 참조하는 경우)

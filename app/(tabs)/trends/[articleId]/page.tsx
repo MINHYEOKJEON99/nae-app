@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { getArticle } from "@/lib/data";
 import HotBadge from "@/components/trends/HotBadge";
+import BackButton from "@/components/trends/BackButton";
 
 interface Props {
   params: Promise<{ articleId: string }>;
@@ -16,9 +16,7 @@ export default async function ArticleDetailPage({ params }: Props) {
   return (
     <div>
       <div className="mb-md">
-        <Link href="/trends" className="text-accent text-[14px] no-underline">
-          ← 목록으로
-        </Link>
+        <BackButton />
       </div>
 
       <div className="bg-fg rounded-lg p-lg">

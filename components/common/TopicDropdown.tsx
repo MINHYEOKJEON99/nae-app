@@ -32,13 +32,8 @@ export default function TopicDropdown({ currentTopic }: TopicDropdownProps) {
   function select(value: string) {
     setOpen(false);
     const params = new URLSearchParams(searchParams.toString());
-    if (value === "IT") {
-      params.delete("topic");
-    } else {
-      params.set("topic", value);
-    }
-    const qs = params.toString();
-    router.push(qs ? `${pathname}?${qs}` : pathname);
+    params.set("topic", value);
+    router.push(`${pathname}?${params.toString()}`);
   }
 
   return (
