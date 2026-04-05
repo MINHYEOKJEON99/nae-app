@@ -4,7 +4,7 @@ import TrendsFeed from "@/components/trends/TrendsFeed";
 import { getArticles } from "@/lib/data";
 import { getKSTDateString } from "@/lib/format";
 
-export const revalidate = 300;
+export const revalidate = 3600;
 
 interface Props {
   searchParams: Promise<{ date?: string }>;

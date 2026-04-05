@@ -7,7 +7,7 @@ import KeywordChips from "@/components/today/KeywordChips";
 import { getBriefing } from "@/lib/data";
 import { getKSTDateString, getKSTYesterdayString } from "@/lib/format";
 
-export const revalidate = 300;
+export const revalidate = 3600;
 
 interface Props {
   searchParams: Promise<{ date?: string }>;
