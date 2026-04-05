@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     time: time ?? '',
     completed: completed ?? false,
     date,
-    createdAt: new Date().toISOString(),
+    createdAt: new Date(),
   };
 
   const db = await getDb();

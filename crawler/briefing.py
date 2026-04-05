@@ -158,7 +158,7 @@ def generate_briefing():
         ],
         "closingSummary": briefing_data.get("closingSummary", ""),
         "keywords": briefing_data.get("keywords", []),
-        "createdAt": datetime.now(timezone.utc).isoformat(),
+        "createdAt": datetime.now(timezone.utc),
     }
 
     briefing_col = db["daily_briefings"]

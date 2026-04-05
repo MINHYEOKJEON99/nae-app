@@ -5,6 +5,7 @@ MongoDB 연결 및 raw_articles upsert 모듈
 """
 
 import os
+from datetime import datetime, timezone
 from pymongo import MongoClient, UpdateOne
 from pymongo.errors import BulkWriteError
 
@@ -29,14 +30,14 @@ def get_db():
 
 
 def ensure_indexes():
-    """raw_articles, articles, daily_briefings 컬렉션 인덱스 생성 + TTL 7일"""
+    """raw_articles, articles, daily_briefings 컬렉션 인덱스 생성 + TTL 14일"""
     db = get_db()
     db.raw_articles.create_index("url", unique=True)
-    # 7일(604800초) 후 자동 삭제
-    db.raw_articles.create_index("createdAt", expireAfterSeconds=604800)
-    db.articles.create_index("createdAt", expireAfterSeconds=604800)
-    db.daily_briefings.create_index("createdAt", expireAfterSeconds=604800)
-    db.todos.create_index("createdAt", expireAfterSeconds=604800)
+    # 14일(1209600초) 후 자동 삭제
+    db.raw_articles.create_index("createdAt", expireAfterSeconds=1209600)
+    db.articles.create_index("createdAt", expireAfterSeconds=1209600)
+    db.daily_briefings.create_index("createdAt", expireAfterSeconds=1209600)
+    db.todos.create_index("createdAt", expireAfterSeconds=1209600)
 
 
 def upsert_articles(articles: list[dict]) -> dict:
@@ -53,6 +54,7 @@ def upsert_articles(articles: list[dict]) -> dict:
 
     operations = []
     for article in articles:
+        article.setdefault("createdAt", datetime.now(timezone.utc))
         operations.append(
             UpdateOne(
                 {"url": article["url"]},

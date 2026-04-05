@@ -185,7 +185,7 @@ def transform():
             "keywords": [],
             "isHot": trend_score >= 80,
             "crawlBatch": doc.get("crawlBatch", ""),
-            "createdAt": datetime.now(timezone.utc).isoformat(),
+            "createdAt": datetime.now(timezone.utc),
         }
 
         operations.append(
