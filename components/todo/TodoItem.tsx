@@ -28,6 +28,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
     <div className="flex items-center gap-md py-[14px] border-b border-border last:border-b-0">
       <button
+        aria-label={todo.completed ? '완료 취소' : '완료 처리'}
         className={`shrink-0 w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-all duration-150 ${
           todo.completed
             ? 'border-accent bg-accent'
@@ -49,6 +50,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
         </span>
       </div>
       <button
+        aria-label="할 일 삭제"
         className="shrink-0 w-7 h-7 flex items-center justify-center text-text-tertiary rounded-sm transition-colors duration-150 hover:bg-button"
         onClick={() => onDelete(todo._id)}
       >
