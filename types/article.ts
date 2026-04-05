@@ -6,6 +6,7 @@ export interface Article {
   title: string;
   url: string;
   category: Category;
+  tags: string[];
   trendScore: number;
   aiSummaryShort: string;
   aiSummaryLong: string;

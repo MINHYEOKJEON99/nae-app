@@ -36,7 +36,11 @@
       "Bash(lsof:*)",
       "Bash(gh api:*)",
       "Bash(open:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(wc:*)",
+      "Bash(MONGODB_URI=\"mongodb+srv://mari394337_db_user:wIZFoiXaWGyQ2R8P@cluster0.3q7uxuy.mongodb.net/nae?appName=Cluster0\" python -m crawler.main)",
+      "Bash(MONGODB_URI=\"mongodb+srv://mari394337_db_user:wIZFoiXaWGyQ2R8P@cluster0.3q7uxuy.mongodb.net/nae?appName=Cluster0\" python -m crawler.transform)",
+      "Bash(MONGODB_URI=\"mongodb+srv://mari394337_db_user:wIZFoiXaWGyQ2R8P@cluster0.3q7uxuy.mongodb.net/nae?appName=Cluster0\" GEMINI_API_KEY=\"AIzaSyBkZBvBlZcJM9lmgLIfn5a4THjploylruc\" python -m crawler.briefing)"
     ]
   }
 }

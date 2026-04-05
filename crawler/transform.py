@@ -179,6 +179,7 @@ def transform():
             "title": title,
             "url": doc["url"],
             "category": doc["category"],
+            "tags": doc.get("tags", ["IT"]),
             "trendScore": trend_score,
             "aiSummaryShort": summary,
             "aiSummaryLong": "",
@@ -203,6 +204,7 @@ def transform():
 
     art_col.create_index([("trendScore", -1), ("createdAt", -1)])
     art_col.create_index("category")
+    art_col.create_index("tags")
     art_col.create_index("url", unique=True)
     print("인덱스 생성 완료")
 

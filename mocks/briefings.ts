@@ -3,6 +3,7 @@ import type { DailyBriefing } from '@/types/briefing';
 export const mockBriefing: DailyBriefing = {
   _id: 'br-001',
   date: '2026-03-04',
+  topic: 'IT',
   intro:
     '안녕하세요, 오늘의 IT 브리핑을 시작하겠습니다. 오늘은 AI 업계의 대형 발표와 함께, 국내 스타트업 투자 소식, 그리고 오픈소스 커뮤니티의 주목할 만한 움직임이 있었습니다. 바쁘신 분들을 위해 핵심만 정리해드리겠습니다.',
   mainIssues: [

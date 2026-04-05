@@ -1,13 +1,13 @@
 """
 크롤러 설정 모듈
-- 태그 기반 확장 구조 (IT, 주식 등 추가 가능)
-- 소스별 카테고리(global/korea) + 태그(IT/주식 등) 매핑
+- 태그 기반 확장 구조 (IT, 주식)
+- 소스별 카테고리(global/korea) + 태그(IT/주식) 매핑
 
-글로벌: RSS 50
-한국: 요즘IT 30 + ITWorld Korea 15 + Byline Network 15 = 60
+IT 글로벌: RSS 50 / IT 한국: 60
+주식 글로벌: 40 / 주식 한국: 50
 """
 
-# ── 글로벌 RSS 피드 ──────────────────────────────
+# ── IT 글로벌 RSS 피드 ───────────────────────────
 RSS_FEEDS = [
     ("https://techcrunch.com/feed/", "TechCrunch"),
     ("https://www.theverge.com/rss/index.xml", "The Verge"),
@@ -17,7 +17,7 @@ RSS_FEEDS = [
 ]
 RSS_ITEMS_PER_FEED = 10
 
-# ── 한국 RSS 피드 ────────────────────────────────
+# ── IT 한국 RSS 피드 ─────────────────────────────
 # (URL, 소스이름, 수집제한)
 KOREA_FEEDS = [
     ("https://yozm.wishket.com/magazine/feed/", "요즘IT", 30),
@@ -25,17 +25,38 @@ KOREA_FEEDS = [
     ("https://byline.network/feed/", "Byline Network", 15),
 ]
 
+# ── 주식 글로벌 RSS 피드 ─────────────────────────
+STOCK_FEEDS = [
+    ("https://feeds.marketwatch.com/marketwatch/marketpulse", "MarketWatch", 10),
+    ("https://finance.yahoo.com/news/rssindex", "Yahoo Finance", 10),
+    ("https://seekingalpha.com/market_currents.xml", "Seeking Alpha", 10),
+    ("https://www.investing.com/rss/news.rss", "Investing.com", 10),
+]
+
+# ── 주식 한국 RSS 피드 ───────────────────────────
+KOREA_STOCK_FEEDS = [
+    ("https://www.hankyung.com/feed/finance", "한국경제", 20),
+    ("https://www.mk.co.kr/rss/30000001/", "매일경제", 15),
+    ("https://biz.chosun.com/svc/rss/www/rss.xml", "조선비즈", 15),
+]
+
 # ── 소스 → 카테고리·태그 매핑 ─────────────────────
-# category: 프론트엔드 필터용 (global / korea)
-# tags: 확장용 태그 (IT, 주식, 반도체 등)
+# category: 지역 필터 (global / korea)
+# tags: 주제 태그 (IT / 주식)
 SOURCE_META = {
-    "rss":      {"category": "global", "tags": ["IT"]},
-    "요즘IT":    {"category": "korea",  "tags": ["IT"]},
-    "ITWorld Korea": {"category": "korea", "tags": ["IT"]},
-    "Byline Network": {"category": "korea", "tags": ["IT"]},
-    # ── 향후 확장 예시 ──
-    # "한경":    {"category": "korea",  "tags": ["주식", "경제"]},
-    # "인베스팅": {"category": "global", "tags": ["주식", "경제"]},
+    # IT
+    "rss":             {"category": "global", "tags": ["IT"]},
+    "요즘IT":           {"category": "korea",  "tags": ["IT"]},
+    "ITWorld Korea":    {"category": "korea",  "tags": ["IT"]},
+    "Byline Network":  {"category": "korea",  "tags": ["IT"]},
+    # 주식
+    "MarketWatch":     {"category": "global", "tags": ["주식"]},
+    "Yahoo Finance":   {"category": "global", "tags": ["주식"]},
+    "Seeking Alpha":   {"category": "global", "tags": ["주식"]},
+    "Investing.com":   {"category": "global", "tags": ["주식"]},
+    "한국경제":         {"category": "korea",  "tags": ["주식"]},
+    "매일경제":         {"category": "korea",  "tags": ["주식"]},
+    "조선비즈":         {"category": "korea",  "tags": ["주식"]},
 }
 
 # 하위 호환용 (기존 코드에서 SOURCE_CATEGORY 참조하는 경우)

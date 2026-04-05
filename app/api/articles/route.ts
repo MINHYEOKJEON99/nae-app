@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
   const page = Math.max(0, Number(params.get('page') ?? 0));
   const pageSize = Math.min(50, Math.max(1, Number(params.get('pageSize') ?? 10)));
   const category = params.get('category'); // 'global' | 'korea' | null
+  const topic = params.get('topic'); // 'IT' | '주식' | null
   const date = params.get('date'); // YYYY-MM-DD | null
 
   const db = await getDb();
@@ -29,6 +30,9 @@ export async function GET(request: NextRequest) {
   };
   if (category && (category === 'global' || category === 'korea')) {
     filter.category = category;
+  }
+  if (topic) {
+    filter.tags = topic;
   }
 
   const skip = page * pageSize;

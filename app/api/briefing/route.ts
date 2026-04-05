@@ -14,9 +14,14 @@ export async function GET(request: NextRequest) {
     if (!date) {
       return NextResponse.json({ error: 'date is required' }, { status: 400 });
     }
+    const topic = request.nextUrl.searchParams.get('topic') || 'IT';
 
     const db = await getDb();
-    const briefing = await db.collection('daily_briefings').findOne({ date });
+    // topic 필드가 없는 레거시 데이터 호환
+    const briefing = await db.collection('daily_briefings').findOne({
+      date,
+      $or: [{ topic }, ...(topic === 'IT' ? [{ topic: { $exists: false } }] : [])],
+    });
 
     if (!briefing) {
       return NextResponse.json({ error: 'not found' }, { status: 404 });

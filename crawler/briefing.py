@@ -1,8 +1,8 @@
 """
 오늘의 브리핑 생성 스크립트
 
-1. articles 컬렉션에서 오늘의 기사 조회 (global + korea)
-2. Gemini로 마크다운 브리핑 생성
+1. articles 컬렉션에서 topic별 기사 조회 (global + korea)
+2. Gemini로 마크다운 브리핑 생성 (IT / 주식 각각)
 3. daily_briefings 컬렉션에 저장
 """
 
@@ -16,6 +16,8 @@ import google.generativeai as genai
 
 KST = timezone(timedelta(hours=9))
 GEMINI_MODEL = "gemini-3.1-flash-lite-preview"
+
+TOPICS = ["IT", "주식"]
 
 
 def get_db():
@@ -36,24 +38,33 @@ def setup_gemini():
     return genai.GenerativeModel(GEMINI_MODEL)
 
 
-def build_prompt(global_articles: list[dict], korea_articles: list[dict]) -> str:
-    """기사 목록으로 Gemini 프롬프트 생성"""
+def _format_articles(articles: list[dict]) -> str:
+    lines = []
+    for i, a in enumerate(articles, 1):
+        lines.append(f"{i}. [{a['title']}]")
+        if a.get("aiSummaryShort"):
+            lines.append(f"   요약: {a['aiSummaryShort'][:200]}")
+        lines.append(f"   trendScore: {a.get('trendScore', 0)}")
+        lines.append("")
+    return "\n".join(lines)
 
-    def format_articles(articles: list[dict]) -> str:
-        lines = []
-        for i, a in enumerate(articles, 1):
-            lines.append(f"{i}. [{a['title']}]")
-            if a.get("aiSummaryShort"):
-                lines.append(f"   요약: {a['aiSummaryShort'][:200]}")
-            lines.append(f"   trendScore: {a.get('trendScore', 0)}")
-            lines.append("")
-        return "\n".join(lines)
 
-    global_text = format_articles(global_articles)
-    korea_text = format_articles(korea_articles)
+def build_prompt(topic: str, global_articles: list[dict], korea_articles: list[dict]) -> str:
+    """topic에 맞는 Gemini 프롬프트 생성"""
+    global_text = _format_articles(global_articles)
+    korea_text = _format_articles(korea_articles)
 
-    return f"""당신은 IT 뉴스 브리핑 전문가입니다.
-아래 글로벌과 한국 IT 기사 목록을 분석하여 오늘의 브리핑을 생성해주세요.
+    if topic == "주식":
+        role = "주식·금융 뉴스 브리핑 전문가"
+        subject = "증시·금융"
+        intro_guide = "오늘의 증시·금융 뉴스 전체 흐름을 2-3문장으로 요약"
+    else:
+        role = "IT 뉴스 브리핑 전문가"
+        subject = "IT"
+        intro_guide = "오늘의 IT 뉴스 전체 흐름을 2-3문장으로 요약"
+
+    return f"""당신은 {role}입니다.
+아래 글로벌과 한국 {subject} 기사 목록을 분석하여 오늘의 브리핑을 생성해주세요.
 
 ## 글로벌 기사
 {global_text}
@@ -67,7 +78,7 @@ def build_prompt(global_articles: list[dict], korea_articles: list[dict]) -> str
 마크다운 코드블록(```)으로 감싸지 마세요.
 
 {{
-  "intro": "오늘의 IT 뉴스 전체 흐름을 2-3문장으로 요약 (마크다운 사용 가능)",
+  "intro": "{intro_guide} (마크다운 사용 가능)",
   "mainIssues": [
     {{
       "title": "이슈 제목",
@@ -88,44 +99,54 @@ def build_prompt(global_articles: list[dict], korea_articles: list[dict]) -> str
 """
 
 
-def generate_briefing():
-    client, db = get_db()
-    model = setup_gemini()
-
+def generate_briefing_for_topic(topic: str, db, model):
+    """특정 topic에 대한 브리핑 생성"""
     today = datetime.now(KST).strftime("%Y-%m-%d")
-    print(f"=== 오늘의 브리핑 생성: {today} ===\n")
+    print(f"\n--- [{topic}] 브리핑 생성: {today} ---")
 
     art_col = db["articles"]
 
-    # 오늘의 기사 조회 (trendScore 상위)
+    # topic별 기사 조회
     global_articles = list(
-        art_col.find({"category": "global"})
+        art_col.find({"tags": topic, "category": "global"})
         .sort("trendScore", -1)
         .limit(20)
     )
     korea_articles = list(
-        art_col.find({"category": "korea"})
+        art_col.find({"tags": topic, "category": "korea"})
         .sort("trendScore", -1)
         .limit(15)
     )
 
-    print(f"글로벌 기사: {len(global_articles)}개")
-    print(f"한국 기사: {len(korea_articles)}개")
+    # tags 필드 없는 레거시 데이터 호환 (IT만)
+    if topic == "IT" and not global_articles:
+        global_articles = list(
+            art_col.find({"category": "global", "tags": {"$exists": False}})
+            .sort("trendScore", -1)
+            .limit(20)
+        )
+    if topic == "IT" and not korea_articles:
+        korea_articles = list(
+            art_col.find({"category": "korea", "tags": {"$exists": False}})
+            .sort("trendScore", -1)
+            .limit(15)
+        )
+
+    print(f"  글로벌 기사: {len(global_articles)}개")
+    print(f"  한국 기사: {len(korea_articles)}개")
 
     if not global_articles and not korea_articles:
-        print("기사가 없습니다. 먼저 크롤링을 실행하세요.")
-        client.close()
+        print(f"  [{topic}] 기사가 없습니다. 스킵합니다.")
         return
 
     # Gemini로 브리핑 생성
-    prompt = build_prompt(global_articles, korea_articles)
-    print("\nGemini에 브리핑 생성 요청 중...")
+    prompt = build_prompt(topic, global_articles, korea_articles)
+    print(f"  Gemini에 [{topic}] 브리핑 생성 요청 중...")
 
     try:
         response = model.generate_content(prompt)
         raw_text = response.text.strip()
 
-        # 마크다운 코드블록 제거
         if raw_text.startswith("```"):
             raw_text = raw_text.split("\n", 1)[1]
         if raw_text.endswith("```"):
@@ -134,18 +155,17 @@ def generate_briefing():
 
         briefing_data = json.loads(raw_text)
     except json.JSONDecodeError as e:
-        print(f"JSON 파싱 실패: {e}")
-        print(f"원본 응답:\n{raw_text[:500]}")
-        client.close()
+        print(f"  JSON 파싱 실패: {e}")
+        print(f"  원본 응답:\n{raw_text[:500]}")
         return
     except Exception as e:
-        print(f"Gemini API 오류: {e}")
-        client.close()
+        print(f"  Gemini API 오류: {e}")
         return
 
     # daily_briefings에 저장
     briefing_doc = {
         "date": today,
+        "topic": topic,
         "intro": briefing_data.get("intro", ""),
         "mainIssues": [
             {
@@ -163,27 +183,28 @@ def generate_briefing():
 
     briefing_col = db["daily_briefings"]
     briefing_col.update_one(
-        {"date": today},
+        {"date": today, "topic": topic},
         {"$set": briefing_doc},
         upsert=True,
     )
 
-    print(f"\n브리핑 저장 완료!")
-    print(f"  날짜: {today}")
-    print(f"  주요 이슈: {len(briefing_doc['mainIssues'])}개")
-    print(f"  키워드: {', '.join(briefing_doc['keywords'])}")
+    print(f"  [{topic}] 브리핑 저장 완료!")
+    print(f"    주요 이슈: {len(briefing_doc['mainIssues'])}개")
+    print(f"    키워드: {', '.join(briefing_doc['keywords'])}")
 
-    # 미리보기
-    print(f"\n--- 브리핑 미리보기 ---")
-    print(f"\n[인트로]\n{briefing_doc['intro']}")
-    for i, issue in enumerate(briefing_doc["mainIssues"], 1):
-        print(f"\n[이슈 {i}] {issue['title']}")
-        print(f"{issue['summary'][:100]}...")
-    print(f"\n[마무리]\n{briefing_doc['closingSummary']}")
-    print(f"\n[키워드] {', '.join(briefing_doc['keywords'])}")
+
+def generate_briefing():
+    client, db = get_db()
+    model = setup_gemini()
+
+    today = datetime.now(KST).strftime("%Y-%m-%d")
+    print(f"=== 오늘의 브리핑 생성: {today} ===")
+
+    for topic in TOPICS:
+        generate_briefing_for_topic(topic, db, model)
 
     client.close()
-    print("\n완료!")
+    print("\n=== 전체 브리핑 생성 완료! ===")
 
 
 if __name__ == "__main__":

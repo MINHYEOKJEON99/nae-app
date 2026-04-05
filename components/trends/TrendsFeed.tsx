@@ -8,20 +8,23 @@ import ArticleCard from "./ArticleCard";
 interface TrendsFeedProps {
   initialArticles: Article[];
   date: string;
+  topic?: string;
   hasMore: boolean;
 }
 
-async function fetchArticles({ pageParam, date }: { pageParam: number; date: string }) {
-  const res = await fetch(`/api/articles?page=${pageParam}&pageSize=20&date=${date}`);
+async function fetchArticles({ pageParam, date, topic }: { pageParam: number; date: string; topic?: string }) {
+  let url = `/api/articles?page=${pageParam}&pageSize=20&date=${date}`;
+  if (topic) url += `&topic=${topic}`;
+  const res = await fetch(url);
   return res.json() as Promise<{ items: Article[]; hasMore: boolean }>;
 }
 
-export default function TrendsFeed({ initialArticles, date, hasMore: initialHasMore }: TrendsFeedProps) {
+export default function TrendsFeed({ initialArticles, date, topic, hasMore: initialHasMore }: TrendsFeedProps) {
   const observerRef = useRef<HTMLDivElement>(null);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ["articles", date],
-    queryFn: ({ pageParam }) => fetchArticles({ pageParam, date }),
+    queryKey: ["articles", date, topic],
+    queryFn: ({ pageParam }) => fetchArticles({ pageParam, date, topic }),
     initialPageParam: 1,
     initialData: {
       pages: [{ items: initialArticles, hasMore: initialHasMore }],

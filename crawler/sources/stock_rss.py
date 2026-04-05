@@ -1,14 +1,15 @@
 """
-RSS 피드 크롤러
-- feedparser 라이브러리 사용
-- 피드별 최근 N개 항목 수집
+주식/금융 RSS 통합 크롤러
+- config.STOCK_FEEDS (글로벌) + KOREA_STOCK_FEEDS (한국) 수집
+- zdnet.py와 동일한 패턴 (SOURCE_META 기반 category/tags 매핑)
 """
 
 import feedparser
-from datetime import datetime, timezone
+from bs4 import BeautifulSoup
+from datetime import timezone
 from email.utils import parsedate_to_datetime
 
-from crawler.config import RSS_FEEDS, RSS_ITEMS_PER_FEED, USER_AGENT
+from crawler.config import STOCK_FEEDS, KOREA_STOCK_FEEDS, SOURCE_META, USER_AGENT
 
 
 def _parse_date(entry) -> str | None:
@@ -24,45 +25,39 @@ def _parse_date(entry) -> str | None:
 
 
 def fetch(crawl_batch: str) -> list[dict]:
-    """모든 RSS 피드에서 기사 수집"""
-    articles = []
+    """주식 RSS 피드(글로벌 + 한국) 수집"""
+    all_articles = []
+    all_feeds = STOCK_FEEDS + KOREA_STOCK_FEEDS
 
-    for feed_url, feed_name in RSS_FEEDS:
+    for feed_url, feed_name, limit in all_feeds:
         try:
-            print(f"  [RSS] {feed_name} 수집 중...")
-            feed = feedparser.parse(
-                feed_url,
-                agent=USER_AGENT,
-            )
+            print(f"  [주식RSS] {feed_name} 수집 중...")
+            feed = feedparser.parse(feed_url, agent=USER_AGENT)
 
             if feed.bozo and not feed.entries:
-                print(f"  [RSS] {feed_name} 파싱 실패: {feed.bozo_exception}")
+                print(f"  [주식RSS] {feed_name} 파싱 실패: {feed.bozo_exception}")
                 continue
 
-            entries = feed.entries[:RSS_ITEMS_PER_FEED]
+            meta = SOURCE_META.get(feed_name, {"category": "global", "tags": ["주식"]})
             count = 0
 
-            for entry in entries:
+            for entry in feed.entries[:limit]:
                 url = entry.get("link")
                 if not url:
                     continue
 
-                title = entry.get("title", "")
                 summary = entry.get("summary", "")
-                # HTML 태그 간단 제거
                 if "<" in summary:
-                    from bs4 import BeautifulSoup
                     summary = BeautifulSoup(summary, "html.parser").get_text(strip=True)
-                # 요약이 너무 길면 잘라내기
                 if len(summary) > 500:
                     summary = summary[:500] + "..."
 
-                articles.append({
-                    "source": "rss",
-                    "category": "global",
-                    "tags": ["IT"],
+                all_articles.append({
+                    "source": feed_name,
+                    "category": meta["category"],
+                    "tags": meta.get("tags", ["주식"]),
                     "url": url,
-                    "title": title,
+                    "title": entry.get("title", ""),
                     "summary": summary,
                     "author": entry.get("author", ""),
                     "publishedAt": _parse_date(entry),
@@ -71,11 +66,11 @@ def fetch(crawl_batch: str) -> list[dict]:
                 })
                 count += 1
 
-            print(f"  [RSS] {feed_name}: {count}개 수집")
+            print(f"  [주식RSS] {feed_name}: {count}개 수집")
 
         except Exception as e:
-            print(f"  [RSS] {feed_name} 수집 실패: {e}")
+            print(f"  [주식RSS] {feed_name} 수집 실패: {e}")
             continue
 
-    print(f"  [RSS] 전체 {len(articles)}개 수집 완료")
-    return articles
+    print(f"  [주식RSS] 전체 {len(all_articles)}개 수집 완료")
+    return all_articles
